@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bd4ef9781884434bab3909b344ea4512" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.DanhMuc" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.DonHang" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.DonVi" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.KhachHang" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.NguoiDung" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.SanPham" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_Cua_Hang_Thu_Cung_2Model.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="QL_Cua_Hang_Thu_Cung_2Model.FK__ChiTietDo__DonHa__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_Cua_Hang_Thu_Cung_2Model.FK__ChiTietDo__SanPh__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DanhMuc__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_Cua_Hang_Thu_Cung_2Model.FK__DonHang__KhachHa__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DonViID__628FA481" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

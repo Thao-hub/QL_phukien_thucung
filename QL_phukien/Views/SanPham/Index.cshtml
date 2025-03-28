@@ -1,0 +1,209 @@
+﻿@model IEnumerable<QL_phukien.Models.SanPham>
+
+@{
+    ViewBag.Title = "Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm / </span>Tất cả sản phẩm</h4>
+    <div class="card">
+        <h5 class="card-header demo-inline-spacing">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Tìm kiếm..." />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                        <span class="tf-icons bx bx-plus"></span>&nbsp; Tạo Sản Phẩm
+                    </button>
+                </div>
+            </div>
+        </h5>
+        <div class="card-body">
+            <div class="row gy-3">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-nowrap">
+                                <th scope="col">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="defaultCheck6" />
+                                    </div>
+                                </th>
+                                <th scope="col">Hình Ảnh</th>
+                                <th scope="col">Tên Sản Phẩm</th>
+                                <th scope="col">SKU</th>
+                                <th scope="col">Thương Hiệu</th>
+                                <th scope="col">Danh Mục</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Số Lượng</th>
+                                <th scope="col">Trạng Thái</th>
+                                <th scope="col">Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check d-flex justify-content-center">
+                                            <input class="form-check-input" type="checkbox" id="defaultCheck6" />
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <img src="@Url.Content("~/Content/assets/img/products/" + @item.HinhAnh)" alt="@item.TenSanPham" class="d-block rounded"
+                                             height="100" width="100" id="@item.ID" />
+                                    </td>
+                                    <td>@item.TenSanPham</td>
+                                    <td>@item.SKU</td>
+                                    <td>@item.ThuongHieu</td>
+                                    <td><span class="badge rounded-pill bg-primary">@item.DanhMuc.Ten</span></td>
+                                    <td>@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                                    <td>@item.SoLuong</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input float-end" type="checkbox"
+                                                   checked />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center gap-2">
+                                            <button type="button"
+                                                    class="btn btn-icon btn-outline-secondary">
+                                                <i class="bx bx-pencil"></i>
+                                            </button><button type="button" class="btn btn-icon btn-outline-danger">
+                                                <i class="bx bx-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                    </table>
+                </div>
+                <!--/ Responsive Table -->
+                <!-- Enable Scrolling & Backdrop Offcanvas -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="mt-3">
+                        <div class="offcanvas offcanvas-end w-50" data-bs-scroll="true" tabindex="-1" id="offcanvasBoth"
+                             aria-labelledby="offcanvasBothLabel">
+                            <div class="offcanvas-header">
+                                <h5 id="offcanvasBothLabel" class="offcanvas-title">Tạo Sản Phẩm</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body my-auto mx-0 flex-grow-0">
+                                <div class="card mb-4">
+
+                                    <!-- Account -->
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                            <img src="@Url.Content("~/Content/assets/img/products/item16.jpg")" alt="user-avatar" class="d-block rounded"
+                                                 height="150" width="150" id="uploadedAvatar" />
+                                            <div class="button-wrapper">
+                                                <label for="upload" class="btn btn-primary me-2 mb-4">
+                                                    <span class="d-none d-sm-block">Tải hình ảnh</span>
+                                                    <i class="bx bx-upload d-block d-sm-none"></i>
+                                                    <input type="file" id="upload" class="account-file-input" hidden
+                                                           accept="image/png, image/jpeg" />
+                                                </label>
+                                                <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                                    <i class="bx bx-reset d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Tải lại</span>
+                                                </button>
+                                                <p class="text-muted mb-0">Cho phép JPG, GIF hoặc PNG. Max dung lượng 800K</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-0" />
+                                    <div class="card-body">
+                                        <form id="themSamPham" method="POST" onsubmit="return false">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="tenSp" class="form-label">Tên sản phẩm</label>
+                                                    <input class="form-control" type="text" id="tenSp" name="tenSp" value="Colour Blocke"
+                                                           autofocus required />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="motaNgan" class="form-label">Mô tả ngắn</label>
+                                                    <input class="form-control" type="text" name="motaNgan" id="motaNgan" value="Black & White Colour Blocked" />
+                                                </div>
+                                                <div class="mb-3 col-md-12">
+                                                    <label class="form-label" for="motaChitiet">Mô tả chi tiết</label>
+                                                    <textarea id="motaChitiet"
+                                                              class="form-control"
+                                                              placeholder="Pate cho chó trộn vị ..."
+                                                              rows="3"></textarea>
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label" for="country">Danh mục</label>
+                                                    <select id="danhMuc" class="select2 form-select">
+                                                        <option value="">Chọn danh mục</option>
+                                                        <option value="Thức ăn và Đồ ăn vặt">Thức ăn và Đồ ăn vặt</option>
+                                                        <option value="Vòng cổ dây xích">Vòng cổ dây xích</option>
+                                                        <option value="Phụ kiện thời trang và tùy chỉnh">Phụ kiện thời trang và tùy chỉnh</option>
+                                                        <option value="Giường và Bộ đồ giường">Giường và Bộ đồ giường</option>
+                                                        <option value="Đồ chơi">Đồ chơi</option>
+                                                        <option value="Quần áo Phụ kiện">Quần áo Phụ kiện</option>
+                                                        <option value="Sản phẩm sức khỏe và sức khỏe">Sản phẩm sức khỏe và sức khỏe</option>
+                                                        <option value="Sản phẩm chải chuốt">Sản phẩm chải chuốt</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="thuongHieu" class="form-label">Thương hiệu</label>
+                                                    <input class="form-control" type="text" name="thuongHieu" id="thuongHieu" value="Sojoss, Pate cho chó trộn vị, Thoor" />
+
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="gia" class="form-label">Giá (Đã Bao Gồm Thuế) </label>
+                                                    <input class="form-control" type="number" id="gia" name="gia"
+                                                           placeholder="0" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="soLuong" class="form-label">Tồn Kho </label>
+                                                    <input type="number" class="form-control" id="soLuong" name="soLuong"
+                                                           placeholder="0" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label" for="sku">SKU</label>
+                                                    <div class="input-group">
+                                                        <input type="text" id="sku" name="sku" class="form-control"
+                                                               placeholder="NF12G318SG" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="maSP" class="form-label">Mã</label>
+                                                    <input type="text" class="form-control" id="maSP" name="maSP"
+                                                           placeholder="1146224" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="" id="noiBat" />
+                                                        <label class="form-check-label" for="noiBat">Đây là sản phẩm nổi bật</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <!-- /Account -->
+                                </div>
+
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-primary me-2"><span class="tf-icons bx bx-save"></span>&nbsp; Lưu</button>
+                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
