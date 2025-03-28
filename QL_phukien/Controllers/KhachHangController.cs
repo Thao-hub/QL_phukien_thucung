@@ -9,7 +9,7 @@ namespace QL_phukien.Controllers
     public class KhachHangController : Controller
     {
         // GET: KhachHang
-        QL_Cua_Hang_Thu_Cung_2Entities db = new QL_Cua_Hang_Thu_Cung_2Entities();
+        QL_Cua_Hang_Thu_Cung_2Entities1 db = new QL_Cua_Hang_Thu_Cung_2Entities1();
         public ActionResult Index()
         {
             var kq = db.KhachHangs.ToList();

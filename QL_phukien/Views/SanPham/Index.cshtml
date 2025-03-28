@@ -8,7 +8,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm / </span>Tất cả sản phẩm</h4>
     <div class="card">
-        <h5 class="card-header demo-inline-spacing">
+        <div class="card-header demo-inline-spacing">
             <div class="row">
                 <div class="col-sm-9">
                     <div class="input-group">
@@ -23,7 +23,7 @@
                     </button>
                 </div>
             </div>
-        </h5>
+        </div>
         <div class="card-body">
             <div class="row gy-3">
                 <div class="table-responsive text-nowrap">
@@ -59,6 +59,7 @@
                                         <img src="@Url.Content("~/Content/assets/img/products/" + @item.HinhAnh)" alt="@item.TenSanPham" class="d-block rounded"
                                              height="100" width="100" id="@item.ID" />
                                     </td>
+
                                     <td>@item.TenSanPham</td>
                                     <td>@item.SKU</td>
                                     <td>@item.ThuongHieu</td>
@@ -103,6 +104,7 @@
                                     <!-- Account -->
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                            
                                             <img src="@Url.Content("~/Content/assets/img/products/item16.jpg")" alt="user-avatar" class="d-block rounded"
                                                  height="150" width="150" id="uploadedAvatar" />
                                             <div class="button-wrapper">
@@ -126,70 +128,50 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="tenSp" class="form-label">Tên sản phẩm</label>
-                                                    <input class="form-control" type="text" id="tenSp" name="tenSp" value="Colour Blocke"
+                                                    <input class="form-control" type="text" id="tenSp" name="tenSp" value="Pate cho mèo"
                                                            autofocus required />
                                                 </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="motaNgan" class="form-label">Mô tả ngắn</label>
-                                                    <input class="form-control" type="text" name="motaNgan" id="motaNgan" value="Black & White Colour Blocked" />
-                                                </div>
-                                                <div class="mb-3 col-md-12">
-                                                    <label class="form-label" for="motaChitiet">Mô tả chi tiết</label>
-                                                    <textarea id="motaChitiet"
-                                                              class="form-control"
-                                                              placeholder="Pate cho chó trộn vị ..."
-                                                              rows="3"></textarea>
-                                                </div>
-
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label" for="country">Danh mục</label>
                                                     <select id="danhMuc" class="select2 form-select">
                                                         <option value="">Chọn danh mục</option>
-                                                        <option value="Thức ăn và Đồ ăn vặt">Thức ăn và Đồ ăn vặt</option>
-                                                        <option value="Vòng cổ dây xích">Vòng cổ dây xích</option>
-                                                        <option value="Phụ kiện thời trang và tùy chỉnh">Phụ kiện thời trang và tùy chỉnh</option>
-                                                        <option value="Giường và Bộ đồ giường">Giường và Bộ đồ giường</option>
+                                                        <option value="Thức ăn và Đồ ăn vặt">Quần áo</option>
                                                         <option value="Đồ chơi">Đồ chơi</option>
-                                                        <option value="Quần áo Phụ kiện">Quần áo Phụ kiện</option>
-                                                        <option value="Sản phẩm sức khỏe và sức khỏe">Sản phẩm sức khỏe và sức khỏe</option>
-                                                        <option value="Sản phẩm chải chuốt">Sản phẩm chải chuốt</option>
+
                                                     </select>
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="thuongHieu" class="form-label">Thương hiệu</label>
-                                                    <input class="form-control" type="text" name="thuongHieu" id="thuongHieu" value="Sojoss, Pate cho chó trộn vị, Thoor" />
+                                                    <input class="form-control" type="text" name="thuongHieu" id="thuongHieu" value="CAT SEA FISH" />
 
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="soluong" class="form-label">Số lượng</label>
+                                                    <input class="form-control" type="number" id="soluong" name="soluong"
+                                                           placeholder="0" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="gia" class="form-label">Giá (Đã Bao Gồm Thuế) </label>
                                                     <input class="form-control" type="number" id="gia" name="gia"
                                                            placeholder="0" />
                                                 </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="soLuong" class="form-label">Tồn Kho </label>
-                                                    <input type="number" class="form-control" id="soLuong" name="soLuong"
-                                                           placeholder="0" />
-                                                </div>
+
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label" for="sku">SKU</label>
                                                     <div class="input-group">
                                                         <input type="text" id="sku" name="sku" class="form-control"
-                                                               placeholder="NF12G318SG" />
+                                                               placeholder="0678-3" />
                                                     </div>
                                                 </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <label for="maSP" class="form-label">Mã</label>
-                                                    <input type="text" class="form-control" id="maSP" name="maSP"
-                                                           placeholder="1146224" />
-                                                </div>
-                                                <div class="mb-3 col-md-6">
-                                                    <div class="form-check mt-3">
-                                                        <input class="form-check-input" type="checkbox" value="" id="noiBat" />
-                                                        <label class="form-check-label" for="noiBat">Đây là sản phẩm nổi bật</label>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <div class="mb-3 col-md-6">
+                                                        <label for="idSP" class="form-label">ID Sản Phẩm</label>
+                                                        <input type="text" class="form-control" id="idSP" name="idSP"
+                                                               value="@item.ID" readonly />
                                                     </div>
-                                                </div>
+                                                }
                                             </div>
-
                                         </form>
                                     </div>
                                     <!-- /Account -->

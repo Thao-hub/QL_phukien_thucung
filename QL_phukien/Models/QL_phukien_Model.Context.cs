@@ -13,10 +13,10 @@ namespace QL_phukien.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_Cua_Hang_Thu_Cung_2Entities : DbContext
+    public partial class QL_Cua_Hang_Thu_Cung_2Entities1 : DbContext
     {
-        public QL_Cua_Hang_Thu_Cung_2Entities()
-            : base("name=QL_Cua_Hang_Thu_Cung_2Entities")
+        public QL_Cua_Hang_Thu_Cung_2Entities1()
+            : base("name=QL_Cua_Hang_Thu_Cung_2Entities1")
         {
         }
     

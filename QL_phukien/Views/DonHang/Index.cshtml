@@ -1,0 +1,207 @@
+﻿@model IEnumerable<QL_phukien.Models.DonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Đơn Hàng</span></h4>
+    <div class="card">
+        <div class="card-header demo-inline-spacing">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Tìm kiếm..." />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                        <span class="tf-icons bx bx-plus"></span>&nbsp; Tạo Đơn hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row gy-3">
+                <div class="table-responsive text-nowrap">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-nowrap">
+                                <th scope="col">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="defaultCheck6" />
+                                    </div>
+                                </th>
+                                <th scope="col">Mã Đơn Hàng</th>
+                                <th scope="col">Thông Tin Khách Hàng</th>
+                                <th scope="col">Địa Chỉ</th>
+                                <th scope="col">Ngày Đặt</th>
+                                <th scope="col">Tổng Tiền</th>
+                                <th scope="col">Thanh Toán</th>
+                                <th scope="col">Trạng Thái</th>
+                                <th scope="col">Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check d-flex justify-content-center">
+                                            <input class="form-check-input" type="checkbox" id="defaultCheck6" />
+                                        </div>
+                                    </th>
+                                    <td>@($"DH-{item.ID:D4}")</td>
+
+                                    <td>
+                                        <div class="d-flex mb-3">
+
+                                            <div class="flex-grow-1 row">
+                                                <div class="col-9 mb-sm-0 mb-2">
+                                                    <h6 class="mb-0">@item.KhachHang.Ten</h6>
+                                                    <small class="text-muted">@item.KhachHang.SoLienHe</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@item.KhachHang.DiaChi</td>
+                                    <td>@item.NgayDat</td>
+                                    <td>@item.TongTien</td>
+                                    <td>
+                                        <span class="badge rounded-pill @(item.ThanhToan.HasValue && item.ThanhToan.Value ? "bg-label-success" : "bg-label-warning")">
+                                            @(item.ThanhToan.HasValue && item.ThanhToan.Value ? "Đã Thanh Toán" : "Chưa Thanh Toán")
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge rounded-pill
+                                            @(item.TrangThai == "Đã Đặt" ? "bg-label-primary" :
+                                            item.TrangThai == "Chờ Xử Lý" ? "bg-label-warning" :
+                                            item.TrangThai == "Đang Xử Lý" ? "bg-label-info" :
+                                            item.TrangThai == "Đã Giao" ? "bg-label-success" :
+                                            item.TrangThai == "Đã Hủy" ? "bg-label-danger" : "bg-label-secondary")">
+                                            @item.TrangThai
+                                        </span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="d-flex justify-content-center align-items-center gap-2">
+                                            <button type="button"
+                                                    class="btn btn-icon btn-outline-secondary">
+                                                <i class="bx bx-pencil"></i>
+                                            </button><button type="button" class="btn btn-icon btn-outline-danger">
+                                                <i class="bx bx-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!--/ Responsive Table -->
+                <!-- Enable Scrolling & Backdrop Offcanvas -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="mt-3">
+                        <div class="offcanvas offcanvas-end w-50" data-bs-scroll="true" tabindex="-1" id="offcanvasBoth"
+                             aria-labelledby="offcanvasBothLabel">
+                            <div class="offcanvas-header">
+                                <h5 id="offcanvasBothLabel" class="offcanvas-title">Chi Tiết Đơn Hàng</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body mx-0 flex-grow-0">
+                                <div class="card mb-4">
+
+                                    <!-- Account -->
+
+                                    <div class="card-body">
+                                        <form id="themSamPham" method="POST" onsubmit="return false">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="tenKH" class="form-label">Tên Khách Hàng</label>
+                                                    <input class="form-control" type="text" id="tenKH" name="tenKH" value="Nguyễn Trần Thị Kim Thái"
+                                                           autofocus required />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="solienhe" class="form-label">Số Điện Thoại</label>
+                                                    <input class="form-control" type="text" name="motaNgan" id="motaNgan" value="" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="motaNgan" class="form-label">Địa Chỉ</label>
+                                                    <input class="form-control" type="text" name="motaNgan" id="motaNgan" value="Angela" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="motaNgan" class="form-label">Đặt Vào</label>
+                                                    <input class="form-control" type="text" name="motaNgan" id="motaNgan" value="January 6, 2025 | 08:31 AM" />
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label" for="country">Thanh Toán</label>
+                                                    <select id="danhMuc" class="select2 form-select">
+                                                        <option value="">Tình Trạng</option>
+                                                        <option value="Đã Thanh Toán" selected>Chưa Thanh Toán</option>
+                                                        <option value="Chưa Thanh Toán">Đã Thanh Toán</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 col-md-6">
+                                                    <label class="form-label" for="trangThai">Trạng Thái</label>
+                                                    <select id="trangThai" class="select2 form-select">
+                                                        <option value="">Tình Trạng</option>
+                                                        <option value="Đơn Hàng Được Đặt" selected>Đơn Hàng Được Đặt</option>
+                                                        <option value="Đang Chờ Xử Lý">Đang Chờ Xử Lý</option>
+                                                        <option value="Đang Xử Lý">Đang Xử Lý</option>
+                                                        <option value="Đã Giao">Đã Giao</option>
+                                                        <option value="Đã Hủy">Đã Hủy</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive text-nowrap">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Sản phẩm</th>
+                                                        <th>Số lượng</th>
+                                                        <th>Đơn giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Coolling Elevated Dog</td>
+                                                        <td>2</td>
+                                                        <td>53,000đ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>Tổng tiền:</td>
+                                                        <td>106,000đ</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /Account -->
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-primary me-2"><span class="tf-icons bx bx-save"></span>&nbsp; Lưu</button>
+                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Thoát</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<</div>

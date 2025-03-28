@@ -27,7 +27,7 @@ namespace QL_phukien.Models
         public decimal Gia { get; set; }
         public string HinhAnh { get; set; }
         public int SoLuong { get; set; }
-        public string TrangThai { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
         public int DonViID { get; set; }
         public int DanhMucID { get; set; }
     

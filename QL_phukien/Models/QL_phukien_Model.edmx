@@ -82,7 +82,7 @@
           <Property Name="Gia" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="255" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
-          <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrangThai" Type="bit" />
           <Property Name="DonViID" Type="int" Nullable="false" />
           <Property Name="DanhMucID" Type="int" Nullable="false" />
         </EntityType>
@@ -275,7 +275,7 @@
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="HinhAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
-          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
           <Property Name="DonViID" Type="Int32" Nullable="false" />
           <Property Name="DanhMucID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__SanPh__6E01572D" FromRole="SanPham" ToRole="ChiTietDonHang" />
@@ -352,7 +352,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_Cua_Hang_Thu_Cung_2Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_Cua_Hang_Thu_Cung_2Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
           <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
           <EntitySet Name="DonHangs" EntityType="Self.DonHang" />
@@ -387,7 +387,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_Cua_Hang_Thu_Cung_2ModelStoreContainer" CdmEntityContainer="QL_Cua_Hang_Thu_Cung_2Entities">
+        <EntityContainerMapping StorageEntityContainer="QL_Cua_Hang_Thu_Cung_2ModelStoreContainer" CdmEntityContainer="QL_Cua_Hang_Thu_Cung_2Entities1">
           <EntitySetMapping Name="ChiTietDonHangs">
             <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.ChiTietDonHang">
               <MappingFragment StoreEntitySet="ChiTietDonHang">
