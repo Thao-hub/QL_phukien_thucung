@@ -1,0 +1,59 @@
+﻿@model QL_phukien.Models.KhachHang
+
+@{
+    ViewBag.Title = "Tạo Khách Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Tạo Khách Hàng</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "KhachHang", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="Ten" class="form-label">Tên Khách Hàng</label>
+                        @Html.TextBoxFor(kh => kh.Ten, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(kh => kh.Ten, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="SoLienHe" class="form-label">Số Liên Hệ</label>
+                        @Html.TextBoxFor(kh => kh.SoLienHe, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(kh => kh.SoLienHe, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="Email" class="form-label">Email</label>
+                        @Html.TextBoxFor(kh => kh.Email, new { @class = "form-control", type = "email" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="GioiTinh" class="form-label">Giới Tính</label>
+                        @Html.DropDownListFor(kh => kh.GioiTinh, new SelectList(new[] { "Nam", "Nữ", "Khác" }), "-- Chọn Giới Tính --", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(kh => kh.GioiTinh, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-12">
+                        <label for="DiaChi" class="form-label">Địa Chỉ</label>
+                        @Html.TextAreaFor(kh => kh.DiaChi, new { @class = "form-control", required = "required", rows = 4 })
+                        @Html.ValidationMessageFor(kh => kh.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="tf-icons bx bx-save"></span>&nbsp; Lưu
+                </button>
+                <a href="@Url.Action("Index", "KhachHang")" class="btn btn-outline-secondary">Hủy</a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

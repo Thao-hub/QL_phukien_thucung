@@ -1,0 +1,187 @@
+﻿@model QL_phukien.Models.DonHang
+
+@{
+    ViewBag.Title = "Create Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Chi Tiết Đơn Hàng</h4>
+    <div class="mx-0 flex-grow-0">
+        <div class="card mb-4">
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "DonHang", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="OrderID" class="form-label">Mã Đơn Hàng</label>
+                            <input class="form-control" type="text" id="OrderID" name="OrderID" value="@ViewBag.OrderID" readonly />
+                            @Html.ValidationMessage("OrderID", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="KhachHangID" class="form-label">Tên Khách Hàng</label>
+                            @Html.DropDownList("KhachHangID", ViewBag.KhachHangList as SelectList, "Chọn khách hàng", new { @class = "form-control", id = "KhachHangID" })
+                            @Html.ValidationMessage("KhachHangID", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="SoLienHe" class="form-label">Số Liên Hệ</label>
+                            <input class="form-control" type="text" name="SoLienHe" id="SoLienHe" readonly />
+                            @Html.ValidationMessage("SoLienHe", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="Email" class="form-label">Email</label>
+                            <input class="form-control" type="text" name="Email" id="Email" readonly />
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="DiaChi" class="form-label">Địa Chỉ</label>
+                            <textarea class="form-control" rows="4" name="DiaChi" id="DiaChi" readonly></textarea>
+                            @Html.ValidationMessage("DiaChi", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table" id="chiTietDonHangTable">
+                                <thead>
+                                    <tr>
+                                        <th width="50">Mã Sản Phẩm</th>
+                                        <th>Tên Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    @*Không có dữ liệu nào*@
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-primary mt-3" id="addProduct">+ Thêm sản phẩm</button>
+                        </div>
+                    </div>
+
+                    @Html.ValidationMessage("ChiTietDonHang", "", new { @class = "text-danger error-chi-tiet-don-hang" })
+
+            <div class="m-3">
+                <h5>Tổng tiền: <span id="totalPrice">0</span></h5>
+                <input class="form-control" type="hidden" name="TongTien" id="TongTien" />
+            </div>
+
+                    <div class="m-3">
+                        <button type="submit" class="btn btn-primary me-2">
+                            <span class="tf-icons bx bx-save"></span>&nbsp; Lưu
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Thoát</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const table = document.querySelector("#chiTietDonHangTable tbody");
+        const totalPriceElement = document.getElementById("totalPrice");
+
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll("#chiTietDonHangTable tbody tr").forEach(row => {
+                const priceText = row.querySelector(".price-input").value || "0";
+                const qty = row.querySelector(".qty-input").value || "1";
+                total += parseInt(priceText) * parseInt(qty);
+            });
+            totalPriceElement.innerText = total.toLocaleString() + "đ";
+            document.getElementById("TongTien").value = total;
+        }
+
+        document.getElementById("addProduct").addEventListener("click", function () {
+            fetch("/DonHang/GetSanPhamList")
+                .then(response => response.json())
+                .then(data => {
+                    const newRow = document.createElement("tr");
+                    let options = `<option value="">Chọn sản phẩm</option>`;
+                    data.forEach(sp => {
+                        options += `<option value="${sp.ID}" data-price="${sp.Gia}" data-stock="${sp.SoLuong}">${sp.ID} - ${sp.TenSanPham} (${sp.SoLuong})</option>`;
+                    });
+
+                    newRow.innerHTML = `
+                    <td><input type="text" name="MaSanPham[]" class="form-control product-id" readonly></td>
+                    <td>
+                        <select class="form-control product-select" name="TenSanPham[]" required>
+                            ${options}
+                        </select>
+                    </td>
+                    <td><input type="number" name="SoLuong[]" min="1" value="1" class="form-control qty-input" required></td>
+                    <td><input type="number" name="DonGia[]" min="0" class="form-control price-input" required readonly></td>
+                    <td><button type="button" class="btn btn-icon btn-outline-danger remove-item"><i class="bx bx-trash-alt"></i></button></td>
+                `;
+                    table.appendChild(newRow);
+
+                    // When selecting a product
+                    newRow.querySelector(".product-select").addEventListener("change", function () {
+                        const selectedOption = this.options[this.selectedIndex];
+                        const price = selectedOption.getAttribute("data-price");
+                        const stock = selectedOption.getAttribute("data-stock");
+
+                        newRow.querySelector(".product-id").value = selectedOption.value; // Hiển thị mã sản phẩm
+                        newRow.querySelector(".price-input").value = price;
+                        newRow.querySelector(".qty-input").setAttribute("max", stock);
+                        updateTotal();
+                    });
+
+                    // Validate quantity
+                    newRow.querySelector(".qty-input").addEventListener("input", function () {
+                        const maxStock = parseInt(this.getAttribute("max"));
+                        if (this.value > maxStock) {
+                            alert("Số lượng không thể vượt quá kho hàng!");
+                            this.value = maxStock;
+                        }
+                        updateTotal();
+                    });
+
+                    newRow.querySelector(".price-input").addEventListener("input", updateTotal);
+                });
+        });
+
+        table.addEventListener("click", function (e) {
+            if (e.target.classList.contains("remove-item")) {
+                e.target.closest("tr").remove();
+                updateTotal();
+            }
+        });
+
+        document.getElementById("KhachHangID").addEventListener("change", function () {
+            const khachHangID = this.value;
+            if (khachHangID) {
+                fetch(`/DonHang/GetKhachHangDetails?khachHangID=${khachHangID}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("SoLienHe").value = data.SoLienHe;
+                        document.getElementById("Email").value = data.Email;
+                        document.getElementById("DiaChi").value = data.DiaChi;
+                    });
+            } else {
+                document.getElementById("SoLienHe").value = "";
+                document.getElementById("Email").value = "";
+                document.getElementById("DiaChi").value = "";
+            }
+        });
+
+        const khachHangDropdown = document.getElementById("KhachHangID");
+
+        // Kiểm tra nếu dropdown tồn tại và có giá trị hợp lệ thì trigger change
+        if (khachHangDropdown && khachHangDropdown.value) {
+            khachHangDropdown.dispatchEvent(new Event("change"));
+        }
+
+        updateTotal();
+    });
+
+
+</script>

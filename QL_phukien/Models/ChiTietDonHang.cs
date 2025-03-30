@@ -20,7 +20,7 @@ namespace QL_phukien.Models
         public int SoLuong { get; set; }
         public decimal Gia { get; set; }
     
-        public virtual DonHang DonHang { get; set; }
         public virtual SanPham SanPham { get; set; }
+        public virtual DonHang DonHang { get; set; }
     }
 }

@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Routing
+@{
+    var currentAction = ViewContext.RouteData.Values["action"].ToString();
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+
+    var controllersSP = new[] { "SanPham", "DanhMuc", "DonVi" };
+    var isActiveSP = controllersSP.Contains(currentController);
+
+    var actions = new[] { "Create", "Edit", "Index" };
+    var isActiveAction = actions.Contains(currentAction);
+}
+
+<!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/"
       data-template="vertical-menu-template-free">
 <head>
@@ -83,7 +95,7 @@
                 <ul class="menu-inner py-1">
 
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item @(currentController == "Home" && currentAction == "Index" ? "active" : "")">
                         <a href="@Url.Action("Index", "Home")" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>Trang Chủ</div>
@@ -92,45 +104,45 @@
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Cửa hàng</span></li>
 
-                    <li class="menu-item">
+                    <li class="menu-item @(isActiveSP ? "active open" : "")">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-box"></i>
                             <div data-i18n="User interface">Sản phẩm</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item @(currentController == "SanPham" && isActiveAction ? "active" : "")">
                                 <a href="@Url.Action("Index", "SanPham")" class="menu-link">
                                     <div data-i18n="Accordion">Tất cả sản phẩm</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item @(currentController == "DanhMuc" && isActiveAction ? "active" : "")">
                                 <a href="@Url.Action("Index", "DanhMuc")" class="menu-link">
                                     <div data-i18n="Badges">Danh mục</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item @(currentController == "DonVi" && isActiveAction ? "active" : "")">
                                 <a href="@Url.Action("Index", "DonVi")" class="menu-link">
                                     <div data-i18n="Buttons">Đơn vị</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item @(currentController == "DonHang" && currentAction == "Index" ? "active" : "")">
                         <a href="@Url.Action("Index", "DonHang")" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
                             <div data-i18n="Basic">Đơn hàng</div>
                         </a>
                     </li>
-                    
+
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Người dùng</span></li>
-                    <li class="menu-item">
+                    <li class="menu-item @(currentController == "NguoiDung" && currentAction == "Index" ? "active" : "")">
                         <a href="@Url.Action("Index", "NguoiDung")" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Người dùng</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item @(currentController == "KhachHang" && currentAction == "Index" ? "active" : "")">
                         <a href="@Url.Action("Index", "KhachHang")" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Khách hàng</div>
@@ -171,7 +183,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="@Url.Content("~/Content/assets/img/avatars/1.png")"/>
+                                                        <img src="@Url.Content("~/Content/assets/img/avatars/1.png")" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -216,7 +228,7 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     @RenderBody()
-                    
+
                     <div class="content-backdrop fade"></div>
                 </div>
                 <!-- Content wrapper -->
@@ -231,7 +243,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/libs")
     @Scripts.Render("~/bundles/menu")
     @Scripts.Render("~/bundles/main")
     @RenderSection("scripts", required: false)

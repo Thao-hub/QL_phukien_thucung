@@ -1,0 +1,30 @@
+﻿@model QL_phukien.Models.ConfirmModalViewModel
+
+<div class="modal fade" id="@Model.ModalID" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">@Model.Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="@Model.MessageID">@Model.Message</p>
+                <form id="@Model.FormID" method="post">
+                    @Html.AntiForgeryToken()
+                    <!-- Dynamically generate hidden inputs -->
+                    @if (Model.Data != null)
+                    {
+                        foreach (var item in Model.Data)
+                        {
+                            <input type="hidden" id="@item.Key" name="@item.Key" value="@item.Value" />
+                        }
+                    }
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelButton" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="submit" form="@Model.FormID" class="btn btn-primary">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

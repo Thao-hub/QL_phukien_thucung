@@ -1,0 +1,45 @@
+﻿@model QL_phukien.Models.DonVi
+
+@{
+    ViewBag.Title = "Tạo Đơn Vị";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Tạo Đơn Vị</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "DonVi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="Ten" class="form-label">Tên Đơn Vị</label>
+                        @Html.TextBoxFor(dv => dv.Ten, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(dv => dv.Ten, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="TrangThai" class="form-label">Trạng Thái</label>
+                        @Html.DropDownListFor(dv => dv.TrangThai, new SelectList(new List<object>
+                                                    {
+                                        new { Value = true, Text = "Còn sử dụng" },
+                                        new { Value = false, Text = "Không còn sử dụng" }
+                                }, "Value", "Text"), "-- Chọn trạng thái --", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(dv => dv.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="tf-icons bx bx-save"></span>&nbsp; Lưu
+                </button>
+                <a href="@Url.Action("Index", "DonVi")" class="btn btn-outline-secondary">Hủy</a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

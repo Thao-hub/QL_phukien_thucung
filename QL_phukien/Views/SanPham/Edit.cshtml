@@ -1,0 +1,102 @@
+﻿@model QL_phukien.Models.SanPham
+
+@{
+    ViewBag.Title = "Cập Nhật Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Cập Nhật Sản Phẩm</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(s => s.ID)
+                <div class="card-body">
+                    <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img src="@Url.Content("~/Content/assets/img/products/" + Model.HinhAnh)"
+                             alt="product-image" class="d-block rounded"
+                             height="150" width="150" id="previewImage" />
+
+                        <div class="button-wrapper">
+                            <label for="upload" class="btn btn-primary me-2 mb-4">
+                                <span class="d-none d-sm-block">Tải hình ảnh</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="upload" name="file" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                            </label>
+                            <button type="button" id="resetImage" class="btn btn-outline-secondary account-image-reset mb-4">
+                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Tải lại</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="TenSanPham" class="form-label">Tên Sản Phẩm</label>
+                            @Html.TextBoxFor(s => s.TenSanPham, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(s => s.TenSanPham, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="ThuongHieu" class="form-label">Thương Hiệu</label>
+                            @Html.TextBoxFor(s => s.ThuongHieu, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(s => s.ThuongHieu, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="DanhMucID" class="form-label">Danh Mục</label>
+                            @Html.DropDownListFor(m => m.DanhMucID, ViewBag.DanhMucList as SelectList, "-- Chọn danh mục --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.DanhMucID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="SKU" class="form-label">SKU</label>
+                            @Html.TextBoxFor(s => s.SKU, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(s => s.SKU, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="DonViID" class="form-label">Đơn Vị</label>
+                            @Html.DropDownListFor(s => s.DonViID, ViewBag.DanhSachDonVi as SelectList, "-- Chọn đơn vị --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.DonViID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="Gia" class="form-label">Giá</label>
+                            @Html.TextBoxFor(s => s.Gia, new { @class = "form-control", type = "number", min = "0", required = "required" })
+                            @Html.ValidationMessageFor(s => s.Gia, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="SoLuong" class="form-label">Số Lượng</label>
+                            @Html.TextBoxFor(s => s.SoLuong, new { @class = "form-control", type = "number", min = "1", required = "required" })
+                            @Html.ValidationMessageFor(s => s.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="TrangThai" class="form-label">Trạng Thái</label>
+                            @Html.DropDownListFor(m => m.TrangThai, new SelectList(new List<object>
+                                   {
+                                    new { Value = true, Text = "Còn sử dụng" },
+                                    new { Value = false, Text = "Không còn sử dụng" }
+                            }, "Value", "Text"), "-- Chọn trạng thái --", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.TrangThai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                    <a href="@Url.Action("Index", "SanPham")" class="btn btn-outline-secondary">Hủy</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/upload")
+
+    <script>
+        document.getElementById("upload").addEventListener("change", function () {
+            previewImage(this, "previewImage");
+        });
+
+        document.getElementById("resetImage").addEventListener("click", function () {
+            resetImage("previewImage", "@Url.Content("~/Content/assets/img/products/default.png")", "upload");
+        });
+    </script>
+}

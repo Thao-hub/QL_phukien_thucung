@@ -37,6 +37,12 @@ namespace QL_phukien
             bundles.Add(new ScriptBundle("~/bundles/main").Include(
                    "~/Scripts/main.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/upload").Include(
+                   "~/Scripts/upload.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/toggleStatus").Include(
+                   "~/Scripts/toggleStatus.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/core.css",

@@ -1,0 +1,78 @@
+﻿@model QL_phukien.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Tạo Người Dùng</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Create", "NguoiDung", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="Ten" class="form-label">Tên Người Dùng</label>
+                        @Html.TextBoxFor(nd => nd.Ten, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(nd => nd.Ten, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="SoLienHe" class="form-label">Số Liên Hệ</label>
+                        @Html.TextBoxFor(nd => nd.SoLienHe, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(nd => nd.SoLienHe, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="Email" class="form-label">Email</label>
+                        @Html.TextBoxFor(nd => nd.Email, new { @class = "form-control", type = "email", required = "required" })
+                        @Html.ValidationMessageFor(nd => nd.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <!-- Mật khẩu -->
+                    <div class="mb-3 col-md-6">
+                        <label for="MatKhau" class="form-label">Mật Khẩu</label>
+                        @Html.Password("MatKhau", "", new { @class = "form-control", required = "required", minlength = "6" })
+                        @Html.ValidationMessage("MatKhau", "", new { @class = "text-danger" })
+                    </div>
+
+                    <!-- Xác nhận mật khẩu -->
+                    <div class="mb-3 col-md-6">
+                        <label for="ConfirmMatKhau" class="form-label">Xác Nhận Mật Khẩu</label>
+                        @Html.Password("ConfirmMatKhau", "", new { @class = "form-control", required = "required", minlength = "6" })
+                        @Html.ValidationMessage("ConfirmMatKhau", "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="VaiTro" class="form-label">Vai Trò</label>
+                        @Html.DropDownListFor(nd => nd.VaiTro, new SelectList(new[] { "Admin", "User" }), "-- Chọn Vai Trò --", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(nd => nd.VaiTro, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="TrangThai" class="form-label">Trạng Thái</label>
+                        @Html.DropDownListFor(nd => nd.TrangThai, new SelectList(new List<object>
+                                                    {
+                                        new { Value = true, Text = "Đang hoạt động" },
+                                        new { Value = false, Text = "Ngừng hoạt động" }
+                                }, "Value", "Text"), "-- Chọn trạng thái --", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(nd => nd.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="tf-icons bx bx-save"></span>&nbsp; Lưu Thay Đổi
+                </button>
+                <a href="@Url.Action("Index", "NguoiDung")" class="btn btn-outline-secondary">Hủy</a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

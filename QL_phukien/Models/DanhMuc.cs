@@ -22,7 +22,6 @@ namespace QL_phukien.Models
     
         public int ID { get; set; }
         public string Ten { get; set; }
-        public string ThuongHieu { get; set; }
         public string HinhAnh { get; set; }
         public Nullable<System.DateTime> CapNhatVao { get; set; }
         public Nullable<System.DateTime> TaoVao { get; set; }

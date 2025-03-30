@@ -1,28 +1,28 @@
-﻿@model IEnumerable<QL_phukien.Models.KhachHang>
+﻿@model IEnumerable<QL_phukien.Models.DanhMuc>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- Content -->
+
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">Khách hàng</h4>
+    <h4 class="fw-bold py-3 mb-4">Danh Mục</h4>
     <div class="card">
         <div class="card-header demo-inline-spacing">
             <div class="row">
                 <div class="col-sm-9">
-                    <form method="get" action="@Url.Action("Index", "KhachHang")">
+                    <form method="get" action="@Url.Action("Index", "DanhMuc")">
                         <div class="input-group">
                             <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                            <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm khách hàng..."
-                                   value="@Request.QueryString["searchTerm"]" autocomplete="off" />
+                            <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm danh mục..."
+                                   value="@ViewBag.SearchTerm" autocomplete="off" />
                             <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-sm-3">
-                    <a href="@Url.Action("Create", "KhachHang")" class="btn btn-primary">
-                        <span class="tf-icons bx bx-plus"></span>&nbsp; Tạo Khách Hàng
+                    <a href="@Url.Action("Create", "DanhMuc")" class="btn btn-primary">
+                        <span class="tf-icons bx bx-plus"></span>&nbsp; Tạo Danh Mục
                     </a>
                 </div>
             </div>
@@ -38,12 +38,12 @@
                                         <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                     </div>
                                 </th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Số Liên Hệ</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Địa Chỉ</th>
-                                <th scope="col">Giới Tính</th>
-                                <th scope="col" class="text-center">Hành Động</th>
+                                <th scope="col">Hình Ảnh</th>
+                                <th scope="col">Tên danh mục</th>
+                                <th scope="col">Thời Gian Tạo</th>
+                                <th scope="col">Thời Gian Cập Nhật</th>
+                                <th scope="col">Trạng Thái</th>
+                                <th scope="col">Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,19 +63,29 @@
                                                 <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                             </div>
                                         </th>
+                                        <td>
+                                            <img src="@Url.Content("~/Content/assets/img/products/" + item.HinhAnh)" alt="user-avatar" class="d-block rounded"
+                                                 height="100" width="100" id="previewImage" />
+                                        </td>
                                         <td>@item.Ten</td>
-                                        <td>@item.SoLienHe</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.DiaChi</td>
-                                        <td>@item.GioiTinh</td>
+                                        <td>@item.TaoVao</td>
+                                        <td>@item.CapNhatVao</td>
+                                        <td class="text-start">
+                                            <div class="form-check form-switch">
+                                                <input type="checkbox" class="form-check-input TrangThai"
+                                                       data-id="@item.ID"
+                                                       data-ten="@item.Ten" @(item.TrangThai == true ? "checked" : "") />
+                                            </div>
+                                        </td>
                                         <td class="text-start">
                                             <div class="d-inline-flex align-items-center gap-2">
                                                 <!-- Nút Chỉnh Sửa -->
-                                                <a href="@Url.Action("Edit", "KhachHang", new { id = item.ID })"
+                                                <a href="@Url.Action("Edit", "DanhMuc", new { id = item.ID })"
                                                    class="btn btn-icon btn-outline-secondary">
                                                     <i class="bx bx-pencil"></i>
                                                 </a>
 
+                                                <!-- Nút Xóa -->
                                                 <a href="javascript:void(0);"
                                                    class="btn btn-icon btn-outline-danger Xoa"
                                                    data-id="@item.ID"
@@ -84,16 +94,31 @@
                                                 </a>
                                             </div>
                                         </td>
+
                                     </tr>
                                 }
                             }
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@Html.Partial("_ConfirmModal", new QL_phukien.Models.ConfirmModalViewModel
+{
+    Title = "Xác nhận thay đổi",
+    Message = "",
+    ModalID = "confirmModal",
+    FormID = "confirmForm",
+    MessageID = "confirmMessage",
+    Data = new Dictionary<string, string>
+    {
+        { "Id", "" },  // Placeholder, will be updated dynamically
+        { "TrangThai", "" }    // Placeholder, will be updated dynamically
+    }
+})
 
 @* Delete Modal *@
 @Html.Partial("_ConfirmModal", new QL_phukien.Models.ConfirmModalViewModel
@@ -114,7 +139,25 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-     
+            var config = {
+                selector: ".TrangThai",
+                selectorType: "checkbox",
+                selectorEvent: "change",
+                modalId: "confirmModal",
+                formId: "confirmForm",
+                checkBoxData: {
+                    id: "data-id",
+                    name: "data-ten"
+                },
+                dynamicData: {
+                    id: "Id",
+                    status: "TrangThai"
+                },
+                message: "Bạn có chắc chắn muốn thay đổi trạng thái của danh mục",
+                messageId: "confirmMessage",
+                updateUrl: "/DanhMuc/UpdateTrangThai"
+            }
+
             var configDeleteModal = {
                 selector: ".Xoa",
                 selectorType: "button",
@@ -129,8 +172,8 @@
                     id: "Id"
                 },
                 messageId: "deleteMessage",
-                message: "Bạn có chắc muốn xóa khách hàng",
-                updateUrl: "/KhachHang/Delete"
+                message: "Bạn có chắc muốn xóa danh mục",
+                updateUrl: "/DanhMuc/Delete"
             }
 
             setupToggleStatus(config);

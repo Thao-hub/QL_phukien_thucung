@@ -1,0 +1,73 @@
+﻿@model QL_phukien.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Danh Mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Chỉnh Sửa Danh Mục</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "DanhMuc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.ID)
+
+            <div class="card-body">
+                <div class="d-flex align-items-start align-items-sm-center gap-4">
+                    <img src="@Url.Content("~/Content/assets/img/products/" + Model.HinhAnh)" alt="Hình ảnh danh mục" class="d-block rounded"
+                         height="150" width="150" id="previewImage" />
+                    <div class="button-wrapper">
+                        <label for="upload" class="btn btn-primary me-2 mb-4">
+                            <span class="d-none d-sm-block">Tải hình ảnh mới</span>
+                            <i class="bx bx-upload d-block d-sm-none"></i>
+                            <input type="file" id="upload" name="file" class="account-file-input" hidden accept="image/png, image/jpeg" />
+                        </label>
+                        <button type="button" id="resetImage" class="btn btn-outline-secondary account-image-reset mb-4">
+                            <i class="bx bx-reset d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Tải lại</span>
+                        </button>
+                        <p class="text-muted mb-0">Cho phép JPG, GIF hoặc PNG. Max dung lượng 800K</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="mb-3 col-md-6">
+                        <label for="Ten" class="form-label">Tên Danh Mục</label>
+                        @Html.TextBoxFor(m => m.Ten, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Ten, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="TrangThai" class="form-label">Trạng Thái</label>
+                        @Html.DropDownListFor(s => s.TrangThai, new SelectList(new List<object>
+                                                    {
+                                        new { Value = true, Text = "Còn sử dụng" },
+                                        new { Value = false, Text = "Không còn sử dụng" }
+                                }, "Value", "Text"), "-- Chọn trạng thái --", new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(s => s.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary"><span class="tf-icons bx bx-save"></span>&nbsp; Lưu Thay Đổi</button>
+                <a href="@Url.Action("Index", "DanhMuc")" class="btn btn-outline-secondary">Hủy</a>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/upload")
+
+    <script>
+        document.getElementById("upload").addEventListener("change", function () {
+            previewImage(this, "previewImage");
+        });
+
+        document.getElementById("resetImage").addEventListener("click", function () {
+            resetImage("previewImage", "@Url.Content("~/Content/assets/img/products/" + Model.HinhAnh)", "upload");
+        });
+    </script>
+}

@@ -21,7 +21,6 @@ namespace QL_phukien.Models
         }
     
         public int ID { get; set; }
-        public int SoThuTu { get; set; }
         public string Ten { get; set; }
         public Nullable<System.DateTime> CapNhatLuc { get; set; }
         public Nullable<bool> TrangThai { get; set; }

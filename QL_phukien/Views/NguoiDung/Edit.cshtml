@@ -1,0 +1,92 @@
+﻿@model QL_phukien.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">Cập Nhật Người Dùng</h4>
+
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "NguoiDung", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="Ten" class="form-label">Tên Người Dùng</label>
+                    @Html.TextBoxFor(nd => nd.Ten, new { @class = "form-control", required = "required" })
+                    @Html.ValidationMessageFor(nd => nd.Ten, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label for="SoLienHe" class="form-label">Số Liên Hệ</label>
+                    @Html.TextBoxFor(nd => nd.SoLienHe, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(nd => nd.SoLienHe, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label for="Email" class="form-label">Email</label>
+                    @if (Model.VaiTro == "Admin")
+                    {
+                        @Html.TextBoxFor(nd => nd.Email, new { @class = "form-control", type = "email", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(nd => nd.Email, new { @class = "form-control", type = "email", required = "required" })
+                    }
+                    @Html.ValidationMessageFor(nd => nd.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Mật khẩu -->
+                <div class="mb-3 col-md-6">
+                    <label for="MatKhauMoi" class="form-label">Mật Khẩu</label>
+                    <input type="password" name="MatKhauMoi" class="form-control" placeholder="Nhập mật khẩu mới nếu muốn đổi">
+                    @Html.ValidationMessage("MatKhauMoi", "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Xác nhận mật khẩu -->
+                <div class="mb-3 col-md-6">
+                    <label for="ConfirmMatKhauMoi" class="form-label">Xác Nhận Mật Khẩu</label>
+                    <input type="password" name="ConfirmMatKhauMoi" class="form-control" placeholder="Nhập lại mật khẩu mới">
+                    @Html.ValidationMessage("ConfirmMatKhauMoi", "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Vai Trò (Chỉ hiển thị, nhưng vẫn gửi dữ liệu) -->
+                <div class="mb-3 col-md-6">
+                    <label for="VaiTro" class="form-label">Vai Trò</label>
+                    @Html.HiddenFor(nd => nd.VaiTro) <!-- Hidden field to submit the value -->
+                    @Html.DropDownListFor(nd => nd.VaiTro, new SelectList(new[] { "Admin", "User" }), "-- Chọn Vai Trò --",
+                        new { @class = "form-control", @readonly = "readonly" }) <!-- Prevent user editing -->
+                    @Html.ValidationMessageFor(nd => nd.VaiTro, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Trạng Thái (Chỉ hiển thị, nhưng vẫn gửi dữ liệu) -->
+                <div class="mb-3 col-md-6">
+                    <label for="TrangThai" class="form-label">Trạng Thái</label>
+                    @Html.HiddenFor(nd => nd.TrangThai) <!-- Hidden field to submit the value -->
+                    @Html.DropDownListFor(nd => nd.TrangThai, new SelectList(new List<object>
+                            {
+                                new { Value = true, Text = "Đang hoạt động" },
+                                new { Value = false, Text = "Ngừng hoạt động" }
+                            }, "Value", "Text"),
+                        "-- Chọn trạng thái --", new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(nd => nd.TrangThai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="tf-icons bx bx-save"></span>&nbsp; Lưu Thay Đổi
+                </button>
+                <a href="@Url.Action("Index", "NguoiDung")" class="btn btn-outline-secondary">Hủy</a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -14,9 +14,36 @@ namespace QL_phukien
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                name: "Home",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "SanPham",
+                url: "{controller}/{action}",
+                defaults: new { controller = "SanPham", action = "Index" }
+            );
+            routes.MapRoute(
+                name: "DanhMuc",
+                url: "{controller}/{action}",
+                defaults: new { controller = "DanhMuc", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "DonHang",
+                url: "{controller}/{action}",
+                defaults: new { controller = "DonHang", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "KhachHang",
+                url: "{controller}/{action}",
+                defaults: new { controller = "KhachHang", action = "Index" }
+            );
+            routes.MapRoute(
+                name: "NguoiDung",
+                url: "{controller}/{action}",
+                defaults: new { controller = "NguoiDung", action = "Index" }
             );
         }
     }

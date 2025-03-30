@@ -26,12 +26,12 @@ namespace QL_phukien.Models
         }
     
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
+        public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
-        public virtual DbSet<DonHang> DonHangs { get; set; }
         public virtual DbSet<DonVi> DonVis { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NguoiDung> NguoiDungs { get; set; }
-        public virtual DbSet<SanPham> SanPhams { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<DonHang> DonHangs { get; set; }
     }
 }

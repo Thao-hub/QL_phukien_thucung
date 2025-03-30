@@ -6,21 +6,24 @@
 }
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Sản phẩm / </span>Đơn vị</h4>
+    <h4 class="fw-bold py-3 mb-4">Đơn vị</h4>
     <div class="card">
         <div class="card-header demo-inline-spacing">
             <div class="row">
                 <div class="col-sm-9">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm..." />
-                    </div>
+                    <form method="get" action="@Url.Action("Index", "DonVi")">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
+                            <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm đơn vị..."
+                                   value="@Request.QueryString["searchTerm"]" autocomplete="off" />
+                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                    <a href="@Url.Action("Create", "DonVi")" class="btn btn-primary">
                         <span class="tf-icons bx bx-plus"></span>&nbsp; Tạo Đơn Vị
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -35,90 +38,140 @@
                                         <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                     </div>
                                 </th>
-                                <th scope="col">Số Thứ Tự</th>
-                                <th scope="col">Tên Đơn Vị</th>
+                                <th scope="col">Tên Đơn Vi</th>
                                 <th scope="col">Cập Nhật Lúc</th>
                                 <th scope="col">Trạng Thái</th>
                                 <th scope="col">Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @if (!Model.Any())
                             {
                                 <tr>
-                                    <th scope="row">
-                                        <div class="form-check d-flex justify-content-center">
-                                            <input class="form-check-input" type="checkbox" id="defaultCheck6" />
-                                        </div>
-                                    </th>
-
-                                    <td>@item.SoThuTu</td>
-                                    <td>@item.Ten</td>
-                                    <td>@item.CapNhatLuc</td>
-                                    <td class="text-center">
-                                        <div class="form-check form-switch d-flex justify-content-center">
-                                            <input aria-checked="false" class="form-check-input float-end" type="checkbox"
-                                                   checked />
-                                        </div>
-                                    </td>
-                                   
-                                    <td class="text-start">
-                                        <div class="d-inline-flex align-items-center gap-2">
-                                            <button type="button"
-                                                    class="btn btn-icon btn-outline-secondary">
-                                                <i class="bx bx-pencil"></i>
-                                            </button><button type="button" class="btn btn-icon btn-outline-danger">
-                                                <i class="bx bx-trash-alt"></i>
-                                            </button>
-                                        </div>
-                                    </td>
+                                    <td colspan="10" class="text-center text-muted">Không có dữ liệu nào</td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
-                </div>
-                <!--/ Responsive Table -->
-                <!-- Enable Scrolling & Backdrop Offcanvas -->
-                <div class="col-lg-6 col-md-6">
-                    <div class="mt-3">
-                        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasBoth"
-                             aria-labelledby="offcanvasBothLabel">
-                            <div class="offcanvas-header">
-                                <h5 id="Tạo Đơn Vị" class="offcanvas-title">Tạo Đơn Vị</h5>
-                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body mx-0 flex-grow-0">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <form id="themSamPham" method="POST" onsubmit="return false">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-12">
-                                                    <label for="tenDV" class="form-label">Tên Đơn Vị</label>
-                                                    <input class="form-control" type="text" id="tenDV" name="tenDV" placeholder="Tìm kiếm..."
-                                                           autofocus required />
-                                                </div>
-                                                <div class="mb-3 col-md-12">
-                                                    <div class="form-check form-switch mb-2">
-                                                        <input class="form-check-input" type="checkbox" id="trangThaiDanhMuc" checked />
-                                                        <label class="form-check-label" for="flexSwitchCheckChecked">Trạng Thái</label>
-                                                    </div>
-                                                </div>
+                            else
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="form-check d-flex justify-content-center">
+                                                <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                             </div>
-                                        </form>
-                                    </div>
-                                    <!-- /Account -->
-                                </div>
+                                        </th>
+                                        <td>@item.Ten</td>
+                                        <td>@item.CapNhatLuc</td>
+                                        <td class="text-start">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input TrangThai"
+                                                       type="checkbox"
+                                                       data-id="@item.ID"
+                                                       data-ten="@item.Ten"
+                                                       @(item.TrangThai == true ? "checked" : "") />
+                                            </div>
+                                        </td>
+                                        <td class="text-start">
+                                            <div class="d-inline-flex align-items-center gap-2">
+                                                <!-- Nút Chỉnh Sửa -->
+                                                <a href="@Url.Action("Edit", "DonVi", new { id = item.ID })"
+                                                   class="btn btn-icon btn-outline-secondary">
+                                                    <i class="bx bx-pencil"></i>
+                                                </a>
 
-                                <div class="mt-2">
-                                    <button type="submit" class="btn btn-primary me-2"><span class="tf-icons bx bx-save"></span>&nbsp; Lưu</button>
-                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="offcanvas">Thoát</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                <!-- Nút Xóa -->
+                                                <a href="javascript:void(0);"
+                                                   class="btn btn-icon btn-outline-danger Xoa"
+                                                   data-id="@item.ID"
+                                                   data-ten="@item.Ten">
+                                                    <i class="bx bx-trash-alt"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@Html.Partial("_ConfirmModal", new QL_phukien.Models.ConfirmModalViewModel
+{
+    Title = "Xác nhận thay đổi",
+    Message = "Bạn có chắc chắn muốn thay đổi trạng thái đơn vị này?",
+    ModalID = "confirmModal",
+    FormID = "confirmForm",
+    MessageID = "confirmMessage",
+    Data = new Dictionary<string, string>
+    {
+        { "Id", "" },  // Placeholder, will be updated dynamically
+        { "TrangThai", "" }    // Placeholder, will be updated dynamically
+    }
+})
+
+@* Delete Modal *@
+@Html.Partial("_ConfirmModal", new QL_phukien.Models.ConfirmModalViewModel
+{
+    Title = "Xác nhận xóa",
+    Message = "",
+    ModalID = "deleteModal",
+    FormID = "deleteForm",
+    MessageID = "deleteMessage",
+    Data = new Dictionary<string, string>
+    {
+        { "Id", "" }
+    }
+})
+
+@section Scripts {
+    @Scripts.Render("~/bundles/toggleStatus")
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var config = {
+                selector: ".TrangThai",
+                selectorType: "checkbox",
+                selectorEvent: "change",
+                modalId: "confirmModal",
+                formId: "confirmForm",
+                checkBoxData: {
+                    id: "data-id",
+                    name: "data-ten"
+                },
+                dynamicData: {
+                    id: "Id",
+                    status: "TrangThai"
+                },
+                message: "Bạn có chắc chắn muốn thay đổi trạng thái của đơn vị",
+                messageId: "confirmMessage",
+                updateUrl: "/DonVi/UpdateTrangThai"
+            }
+
+            var configDeleteModal = {
+                selector: ".Xoa",
+                selectorType: "button",
+                selectorEvent: "click",
+                modalId: "deleteModal",
+                formId: "deleteForm",
+                checkBoxData: {
+                    id: "data-id",
+                    name: "data-ten"
+                },
+                dynamicData: {
+                    id: "Id"
+                },
+                messageId: "deleteMessage",
+                message: "Bạn có chắc muốn xóa đơn vị",
+                updateUrl: "/DonVi/Delete"
+            }
+
+            setupToggleStatus(config);
+            setupToggleStatus(configDeleteModal);
+        });
+    </script>
+}

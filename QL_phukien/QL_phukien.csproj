@@ -129,10 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\DonViController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -140,6 +142,7 @@
     <Compile Include="Models\ChiTietDonHang.cs">
       <DependentUpon>QL_phukien_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfirmModalViewModel.cs" />
     <Compile Include="Models\DanhMuc.cs">
       <DependentUpon>QL_phukien_Model.tt</DependentUpon>
     </Compile>
@@ -226,13 +229,15 @@
     <Content Include="Content\assets\img\layouts\layout-without-menu-light.png" />
     <Content Include="Content\assets\img\layouts\layout-without-navbar-light.png" />
     <Content Include="Content\assets\img\products\2eS352lfO8Dm2WOhshdHuPWp6Q8kHfMzuq8Mt6cB.jpg" />
-    <Content Include="Content\assets\img\products\item10.jpg" />
+    <Content Include="Content\assets\img\products\default.png" />
+    <Content Include="Content\assets\img\products\dochoi.jpeg" />
     <Content Include="Content\assets\img\products\item11.jpg" />
     <Content Include="Content\assets\img\products\item13.jpg" />
     <Content Include="Content\assets\img\products\item14.jpg" />
     <Content Include="Content\assets\img\products\item15.jpg" />
     <Content Include="Content\assets\img\products\item16.jpg" />
     <Content Include="Content\assets\img\products\limzP8hb7O5ncGAKitv5KGVPelReuAznlvY45bGz.jpg" />
+    <Content Include="Content\assets\img\products\quanao.jpeg" />
     <Content Include="Content\assets\img\products\suFh3bUnieD9EJSXaj64w93CTcQjwgzwbPrLDDIp.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -300,6 +305,8 @@
     <Content Include="Scripts\libs\ui-modals.js" />
     <Content Include="Scripts\libs\ui-popover.js" />
     <Content Include="Scripts\libs\ui-toasts.js" />
+    <Content Include="Scripts\toggleStatus.js" />
+    <Content Include="Scripts\upload.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -318,6 +325,21 @@
     <Content Include="Views\KhachHang\Index.cshtml" />
     <Content Include="Views\DonVi\Index.cshtml" />
     <Content Include="Views\DonHang\Index.cshtml" />
+    <Content Include="Views\DanhMuc\Index.cshtml" />
+    <Content Include="Views\DanhMuc\Create.cshtml" />
+    <Content Include="Views\DanhMuc\Edit.cshtml" />
+    <Content Include="Views\DonVi\Create.cshtml" />
+    <Content Include="Views\DonVi\Edit.cshtml" />
+    <Content Include="Views\SanPham\Create.cshtml" />
+    <Content Include="Views\SanPham\Edit.cshtml" />
+    <Content Include="Views\KhachHang\Create.cshtml" />
+    <Content Include="Views\KhachHang\Edit.cshtml" />
+    <Content Include="Views\Shared\_ConfirmModal.cshtml" />
+    <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\NguoiDung\Create.cshtml" />
+    <Content Include="Views\NguoiDung\Edit.cshtml" />
+    <Content Include="Views\DonHang\Create.cshtml" />
+    <Content Include="Views\DonHang\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

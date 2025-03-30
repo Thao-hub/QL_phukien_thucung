@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_Cua_Hang_Thu_Cung_2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_Cua_Hang_Thu_Cung_2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietDonHang">
           <Key>
             <PropertyRef Name="ID" />
@@ -21,7 +21,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" />
-          <Property Name="ThuongHieu" Type="nvarchar" MaxLength="50" />
           <Property Name="HinhAnh" Type="nvarchar" MaxLength="255" />
           <Property Name="CapNhatVao" Type="datetime" />
           <Property Name="TaoVao" Type="datetime" />
@@ -37,13 +36,13 @@
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
           <Property Name="ThanhToan" Type="bit" />
+          <Property Name="OrderID" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="DonVi">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SoThuTu" Type="int" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CapNhatLuc" Type="datetime" />
           <Property Name="TrangThai" Type="bit" />
@@ -55,7 +54,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SoLienHe" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
         </EntityType>
@@ -186,8 +185,7 @@
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_Cua_Hang_Thu_Cung_2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -200,69 +198,8 @@
           <Property Name="SanPhamID" Type="Int32" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <NavigationProperty Name="DonHang" Relationship="Self.FK__ChiTietDo__DonHa__6D0D32F4" FromRole="ChiTietDonHang" ToRole="DonHang" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietDo__SanPh__6E01572D" FromRole="ChiTietDonHang" ToRole="SanPham" />
-        </EntityType>
-        <EntityType Name="DanhMuc">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ThuongHieu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HinhAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CapNhatVao" Type="DateTime" Precision="3" />
-          <Property Name="TaoVao" Type="DateTime" Precision="3" />
-          <Property Name="TrangThai" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__DanhMuc__6383C8BA" FromRole="DanhMuc" ToRole="SanPham" />
-        </EntityType>
-        <EntityType Name="DonHang">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KhachHangID" Type="Int32" />
-          <Property Name="NgayDat" Type="DateTime" Precision="3" />
-          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ThanhToan" Type="Boolean" />
-          <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__DonHa__6D0D32F4" FromRole="DonHang" ToRole="ChiTietDonHang" />
-          <NavigationProperty Name="KhachHang" Relationship="Self.FK__DonHang__KhachHa__66603565" FromRole="DonHang" ToRole="KhachHang" />
-        </EntityType>
-        <EntityType Name="DonVi">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SoThuTu" Type="Int32" Nullable="false" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CapNhatLuc" Type="DateTime" Precision="3" />
-          <Property Name="TrangThai" Type="Boolean" />
-          <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__DonViID__628FA481" FromRole="DonVi" ToRole="SanPham" />
-        </EntityType>
-        <EntityType Name="KhachHang">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SoLienHe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DonHangs" Relationship="Self.FK__DonHang__KhachHa__66603565" FromRole="KhachHang" ToRole="DonHang" />
-        </EntityType>
-        <EntityType Name="NguoiDung">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SoLienHe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="VaiTro" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="Boolean" />
+          <NavigationProperty Name="DonHang" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__ChiTietDo__DonHa__6D0D32F4" FromRole="ChiTietDonHang" ToRole="DonHang" />
         </EntityType>
         <EntityType Name="SanPham">
           <Key>
@@ -279,8 +216,8 @@
           <Property Name="DonViID" Type="Int32" Nullable="false" />
           <Property Name="DanhMucID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDo__SanPh__6E01572D" FromRole="SanPham" ToRole="ChiTietDonHang" />
-          <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__DanhMuc__6383C8BA" FromRole="SanPham" ToRole="DanhMuc" />
-          <NavigationProperty Name="DonVi" Relationship="Self.FK__SanPham__DonViID__628FA481" FromRole="SanPham" ToRole="DonVi" />
+          <NavigationProperty Name="DanhMuc" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DanhMuc__6383C8BA" FromRole="SanPham" ToRole="DanhMuc" />
+          <NavigationProperty Name="DonVi" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DonViID__628FA481" FromRole="SanPham" ToRole="DonVi" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -292,18 +229,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__ChiTietDo__DonHa__6D0D32F4">
-          <End Role="DonHang" Type="Self.DonHang" Multiplicity="0..1" />
-          <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonHang">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ChiTietDonHang">
-              <PropertyRef Name="DonHangID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ChiTietDo__SanPh__6E01572D">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
           <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
@@ -316,9 +241,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="QL_Cua_Hang_Thu_Cung_2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
+          <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__ChiTietDo__SanPh__6E01572D" Association="Self.FK__ChiTietDo__SanPh__6E01572D">
+            <End Role="SanPham" EntitySet="SanPhams" />
+            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+          </AssociationSet>
+          <EntitySet Name="DanhMucs" EntityType="QL_Cua_Hang_Thu_Cung_2Model.DanhMuc" />
+          <AssociationSet Name="FK__SanPham__DanhMuc__6383C8BA" Association="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DanhMuc__6383C8BA">
+            <End Role="DanhMuc" EntitySet="DanhMucs" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          <EntitySet Name="DonVis" EntityType="QL_Cua_Hang_Thu_Cung_2Model.DonVi" />
+          <AssociationSet Name="FK__SanPham__DonViID__628FA481" Association="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DonViID__628FA481">
+            <End Role="DonVi" EntitySet="DonVis" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          <EntitySet Name="KhachHangs" EntityType="QL_Cua_Hang_Thu_Cung_2Model.KhachHang" />
+          <EntitySet Name="NguoiDungs" EntityType="QL_Cua_Hang_Thu_Cung_2Model.NguoiDung" />
+          <EntitySet Name="DonHangs" EntityType="QL_Cua_Hang_Thu_Cung_2Model.DonHang" />
+          <AssociationSet Name="FK__ChiTietDo__DonHa__6D0D32F4" Association="QL_Cua_Hang_Thu_Cung_2Model.FK__ChiTietDo__DonHa__6D0D32F4">
+            <End Role="DonHang" EntitySet="DonHangs" />
+            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DonHang__KhachHa__66603565" Association="QL_Cua_Hang_Thu_Cung_2Model.FK__DonHang__KhachHa__66603565">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="DonHang" EntitySet="DonHangs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DanhMuc">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CapNhatVao" Type="DateTime" Precision="3" />
+          <Property Name="TaoVao" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <NavigationProperty Name="SanPhams" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DanhMuc__6383C8BA" FromRole="DanhMuc" ToRole="SanPham" />
+        </EntityType>
         <Association Name="FK__SanPham__DanhMuc__6383C8BA">
-          <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="1" />
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.DanhMuc" Role="DanhMuc" Multiplicity="1" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.SanPham" Role="SanPham" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DanhMuc">
               <PropertyRef Name="ID" />
@@ -328,21 +295,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DonHang__KhachHa__66603565">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
-          <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DonHang">
-              <PropertyRef Name="KhachHangID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="DonVi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CapNhatLuc" Type="DateTime" Precision="3" />
+          <Property Name="TrangThai" Type="Boolean" />
+          <NavigationProperty Name="SanPhams" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__SanPham__DonViID__628FA481" FromRole="DonVi" ToRole="SanPham" />
+        </EntityType>
         <Association Name="FK__SanPham__DonViID__628FA481">
-          <End Role="DonVi" Type="Self.DonVi" Multiplicity="1" />
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.DonVi" Role="DonVi" Multiplicity="1" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.SanPham" Role="SanPham" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DonVi">
               <PropertyRef Name="ID" />
@@ -352,36 +317,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_Cua_Hang_Thu_Cung_2Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
-          <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
-          <EntitySet Name="DonHangs" EntityType="Self.DonHang" />
-          <EntitySet Name="DonVis" EntityType="Self.DonVi" />
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
-          <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
-          <EntitySet Name="SanPhams" EntityType="Self.SanPham" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK__ChiTietDo__DonHa__6D0D32F4" Association="Self.FK__ChiTietDo__DonHa__6D0D32F4">
-            <End Role="DonHang" EntitySet="DonHangs" />
-            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChiTietDo__SanPh__6E01572D" Association="Self.FK__ChiTietDo__SanPh__6E01572D">
-            <End Role="SanPham" EntitySet="SanPhams" />
-            <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SanPham__DanhMuc__6383C8BA" Association="Self.FK__SanPham__DanhMuc__6383C8BA">
-            <End Role="DanhMuc" EntitySet="DanhMucs" />
-            <End Role="SanPham" EntitySet="SanPhams" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DonHang__KhachHa__66603565" Association="Self.FK__DonHang__KhachHa__66603565">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="DonHang" EntitySet="DonHangs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SanPham__DonViID__628FA481" Association="Self.FK__SanPham__DonViID__628FA481">
-            <End Role="DonVi" EntitySet="DonVis" />
-            <End Role="SanPham" EntitySet="SanPhams" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLienHe" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonHangs" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__DonHang__KhachHa__66603565" FromRole="KhachHang" ToRole="DonHang" />
+        </EntityType>
+        <EntityType Name="NguoiDung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLienHe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MatKhau" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VaiTro" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrangThai" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KhachHangID" Type="Int32" />
+          <Property Name="NgayDat" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThanhToan" Type="Boolean" />
+          <Property Name="OrderID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChiTietDonHangs" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__ChiTietDo__DonHa__6D0D32F4" FromRole="DonHang" ToRole="ChiTietDonHang" />
+          <NavigationProperty Name="KhachHang" Relationship="QL_Cua_Hang_Thu_Cung_2Model.FK__DonHang__KhachHa__66603565" FromRole="DonHang" ToRole="KhachHang" />
+        </EntityType>
+        <Association Name="FK__ChiTietDo__DonHa__6D0D32F4">
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.DonHang" Role="DonHang" Multiplicity="0..1" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonHang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietDonHang">
+              <PropertyRef Name="DonHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DonHang__KhachHa__66603565">
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.KhachHang" Role="KhachHang" Multiplicity="0..1" />
+          <End Type="QL_Cua_Hang_Thu_Cung_2Model.DonHang" Role="DonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DonHang">
+              <PropertyRef Name="KhachHangID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -396,67 +393,6 @@
                 <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DanhMucs">
-            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DanhMuc">
-              <MappingFragment StoreEntitySet="DanhMuc">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="ThuongHieu" ColumnName="ThuongHieu" />
-                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
-                <ScalarProperty Name="CapNhatVao" ColumnName="CapNhatVao" />
-                <ScalarProperty Name="TaoVao" ColumnName="TaoVao" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DonHangs">
-            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DonHang">
-              <MappingFragment StoreEntitySet="DonHang">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="KhachHangID" ColumnName="KhachHangID" />
-                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="ThanhToan" ColumnName="ThanhToan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DonVis">
-            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DonVi">
-              <MappingFragment StoreEntitySet="DonVi">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SoThuTu" ColumnName="SoThuTu" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="CapNhatLuc" ColumnName="CapNhatLuc" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KhachHangs">
-            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.KhachHang">
-              <MappingFragment StoreEntitySet="KhachHang">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="SoLienHe" ColumnName="SoLienHe" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NguoiDungs">
-            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.NguoiDung">
-              <MappingFragment StoreEntitySet="NguoiDung">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="SoLienHe" ColumnName="SoLienHe" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="VaiTro" ColumnName="VaiTro" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -484,6 +420,66 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DanhMucs">
+            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DanhMuc">
+              <MappingFragment StoreEntitySet="DanhMuc">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TaoVao" ColumnName="TaoVao" />
+                <ScalarProperty Name="CapNhatVao" ColumnName="CapNhatVao" />
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonVis">
+            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DonVi">
+              <MappingFragment StoreEntitySet="DonVi">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="CapNhatLuc" ColumnName="CapNhatLuc" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoLienHe" ColumnName="SoLienHe" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NguoiDungs">
+            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.NguoiDung">
+              <MappingFragment StoreEntitySet="NguoiDung">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="VaiTro" ColumnName="VaiTro" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoLienHe" ColumnName="SoLienHe" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonHangs">
+            <EntityTypeMapping TypeName="QL_Cua_Hang_Thu_Cung_2Model.DonHang">
+              <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ThanhToan" ColumnName="ThanhToan" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="KhachHangID" ColumnName="KhachHangID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
