@@ -73,7 +73,7 @@
                                 new { Value = true, Text = "Đang hoạt động" },
                                 new { Value = false, Text = "Ngừng hoạt động" }
                             }, "Value", "Text"),
-                        "-- Chọn trạng thái --", new { @class = "form-control", @readonly = "readonly" })
+                        "-- Chọn trạng thái --", new { @class = "form-control" })
                     @Html.ValidationMessageFor(nd => nd.TrangThai, "", new { @class = "text-danger" })
                 </div>
             </div>

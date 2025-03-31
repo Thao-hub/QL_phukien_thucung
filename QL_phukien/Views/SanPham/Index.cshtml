@@ -14,7 +14,7 @@
                     <form method="get" action="@Url.Action("Index", "SanPham")">
                         <div class="input-group">
                             <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                            <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm..."
+                            <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm sản phẩm..."
                                    value="@Request.QueryString["searchTerm"]" autocomplete="off" />
                             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                         </div>
@@ -33,11 +33,11 @@
                     <table class="table">
                         <thead>
                             <tr class="text-nowrap">
-                                <th scope="col">
+                                @*<th scope="col">
                                     <div class="form-check d-flex justify-content-center">
                                         <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                     </div>
-                                </th>
+                                </th>*@
                                 <th scope="col">Hình Ảnh</th>
                                 <th scope="col">Tên Sản Phẩm</th>
                                 <th scope="col">SKU</th>
@@ -62,11 +62,11 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                        <th scope="row">
+                                        @*<th scope="row">
                                             <div class="form-check d-flex justify-content-center">
                                                 <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                             </div>
-                                        </th>
+                                        </th>*@
                                         <td>
                                             <img src="@Url.Content("~/Content/assets/img/products/" + @item.HinhAnh)" alt="@item.TenSanPham" class="d-block rounded"
                                                  height="100" width="100" id="@item.ID" />

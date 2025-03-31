@@ -107,12 +107,12 @@ namespace QL_phukien.Controllers
                 }
 
                 // Cập nhật các trường khác từ form
+                
                 existingUser.Ten = nguoiDung.Ten;
                 existingUser.SoLienHe = nguoiDung.SoLienHe;
                 existingUser.Email = nguoiDung.Email;
                 existingUser.VaiTro = nguoiDung.VaiTro;
                 existingUser.TrangThai = nguoiDung.TrangThai;
-
                 if (ModelState.IsValid)
                 {
                     db.Entry(existingUser).State = System.Data.Entity.EntityState.Modified;

@@ -33,11 +33,11 @@
                     <table class="table">
                         <thead>
                             <tr class="text-nowrap">
-                                <th scope="col">
+                                @*<th scope="col">
                                     <div class="form-check d-flex justify-content-center">
                                         <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                     </div>
-                                </th>
+                                </th>*@
                                 <th scope="col">Tên</th>
                                 <th scope="col">Số Liên Hệ</th>
                                 <th scope="col">Email</th>
@@ -58,11 +58,11 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                        <th scope="row">
+                                        @*<th scope="row">
                                             <div class="form-check d-flex justify-content-center">
                                                 <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                             </div>
-                                        </th>
+                                        </th>*@
                                         <td>@item.Ten</td>
                                         <td>@item.SoLienHe</td>
                                         <td>@item.Email</td>

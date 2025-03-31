@@ -13,7 +13,7 @@
                 <div class="col-sm-9">
                     <div class="input-group">
                         <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm..." />
+                        <input type="text" class="form-control" placeholder="Tìm kiếm đơn hàng..." />
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -29,11 +29,11 @@
                     <table class="table">
                         <thead>
                             <tr class="text-nowrap">
-                                <th scope="col">
+                                @*<th scope="col">
                                     <div class="form-check d-flex justify-content-center">
                                         <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                     </div>
-                                </th>
+                                </th>*@
                                 <th scope="col">Mã Đơn Hàng</th>
                                 <th scope="col">Thông Tin Khách Hàng</th>
                                 <th scope="col">Email</th>
@@ -57,11 +57,11 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                        <th scope="row">
+                                       @* <th scope="row">
                                             <div class="form-check d-flex justify-content-center">
                                                 <input class="form-check-input" type="checkbox" id="defaultCheck6" />
                                             </div>
-                                        </th>
+                                        </th>*@
                                         <td>@item.OrderID</td>
 
                                         <td>
