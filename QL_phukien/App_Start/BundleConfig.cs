@@ -11,6 +11,9 @@ namespace QL_phukien
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery1110").Include(
+                        "~/Scripts/jquery-1.11.0.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -42,6 +45,12 @@ namespace QL_phukien
 
             bundles.Add(new ScriptBundle("~/bundles/toggleStatus").Include(
                    "~/Scripts/toggleStatus.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
+                   "~/Scripts/plugins.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/script").Include(
+                   "~/Scripts/script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

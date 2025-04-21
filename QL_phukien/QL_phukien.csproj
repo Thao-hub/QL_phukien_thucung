@@ -134,6 +134,7 @@
     <Compile Include="Controllers\DonViController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,6 +225,51 @@
     <Content Include="Content\assets\img\illustrations\girl-doing-yoga-light.png" />
     <Content Include="Content\assets\img\illustrations\man-with-laptop-light.png" />
     <Content Include="Content\assets\img\illustrations\page-misc-error-light.png" />
+    <Content Include="Content\assets\img\landing\background-img.png" />
+    <Content Include="Content\assets\img\landing\banner-img.png" />
+    <Content Include="Content\assets\img\landing\banner-img2.png" />
+    <Content Include="Content\assets\img\landing\banner-img3.png" />
+    <Content Include="Content\assets\img\landing\banner-img4.png" />
+    <Content Include="Content\assets\img\landing\blog-large.jpg" />
+    <Content Include="Content\assets\img\landing\blog-lg1.jpg" />
+    <Content Include="Content\assets\img\landing\blog-lg2.jpg" />
+    <Content Include="Content\assets\img\landing\blog-lg3.jpg" />
+    <Content Include="Content\assets\img\landing\blog-lg4.jpg" />
+    <Content Include="Content\assets\img\landing\blog1.jpg" />
+    <Content Include="Content\assets\img\landing\blog2.jpg" />
+    <Content Include="Content\assets\img\landing\blog3.jpg" />
+    <Content Include="Content\assets\img\landing\chocolat\close.png" />
+    <Content Include="Content\assets\img\landing\chocolat\fullscreen-black.png" />
+    <Content Include="Content\assets\img\landing\chocolat\fullscreen.png" />
+    <Content Include="Content\assets\img\landing\chocolat\left.png" />
+    <Content Include="Content\assets\img\landing\chocolat\loader.gif" />
+    <Content Include="Content\assets\img\landing\chocolat\right.png" />
+    <Content Include="Content\assets\img\landing\insta1.jpg" />
+    <Content Include="Content\assets\img\landing\insta2.jpg" />
+    <Content Include="Content\assets\img\landing\insta3.jpg" />
+    <Content Include="Content\assets\img\landing\insta4.jpg" />
+    <Content Include="Content\assets\img\landing\insta5.jpg" />
+    <Content Include="Content\assets\img\landing\insta6.jpg" />
+    <Content Include="Content\assets\img\landing\item1.jpg" />
+    <Content Include="Content\assets\img\landing\item10.jpg" />
+    <Content Include="Content\assets\img\landing\item11.jpg" />
+    <Content Include="Content\assets\img\landing\item12.jpg" />
+    <Content Include="Content\assets\img\landing\item13.jpg" />
+    <Content Include="Content\assets\img\landing\item14.jpg" />
+    <Content Include="Content\assets\img\landing\item15.jpg" />
+    <Content Include="Content\assets\img\landing\item16.jpg" />
+    <Content Include="Content\assets\img\landing\item2.jpg" />
+    <Content Include="Content\assets\img\landing\item3.jpg" />
+    <Content Include="Content\assets\img\landing\item4.jpg" />
+    <Content Include="Content\assets\img\landing\item5.jpg" />
+    <Content Include="Content\assets\img\landing\item6.jpg" />
+    <Content Include="Content\assets\img\landing\item7.jpg" />
+    <Content Include="Content\assets\img\landing\item8.jpg" />
+    <Content Include="Content\assets\img\landing\item9.jpg" />
+    <Content Include="Content\assets\img\landing\logo.png" />
+    <Content Include="Content\assets\img\landing\reviewer-1.jpg" />
+    <Content Include="Content\assets\img\landing\reviewer-2.jpg" />
+    <Content Include="Content\assets\img\landing\reviewer-3.jpg" />
     <Content Include="Content\assets\img\layouts\layout-container-light.png" />
     <Content Include="Content\assets\img\layouts\layout-fluid-light.png" />
     <Content Include="Content\assets\img\layouts\layout-without-menu-light.png" />
@@ -288,6 +334,7 @@
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\config.js" />
+    <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\libs\dashboards-analytics.js" />
     <Content Include="Scripts\libs\extended-ui-perfect-scrollbar.js" />
     <Content Include="Scripts\libs\form-basic-inputs.js" />
@@ -308,6 +355,9 @@
     <Content Include="Scripts\libs\ui-modals.js" />
     <Content Include="Scripts\libs\ui-popover.js" />
     <Content Include="Scripts\libs\ui-toasts.js" />
+    <Content Include="Scripts\modernizr.js" />
+    <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\toggleStatus.js" />
     <Content Include="Scripts\upload.js" />
     <Content Include="Web.config" />
@@ -343,6 +393,8 @@
     <Content Include="Views\NguoiDung\Edit.cshtml" />
     <Content Include="Views\DonHang\Create.cshtml" />
     <Content Include="Views\DonHang\Edit.cshtml" />
+    <Content Include="Views\Shared\_LandingLayout.cshtml" />
+    <Content Include="Views\Landing\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

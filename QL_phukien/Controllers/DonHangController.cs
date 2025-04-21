@@ -132,7 +132,7 @@ namespace QL_phukien.Controllers
             if (donHang == null)
                 return HttpNotFound();
 
-            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "TenKhachHang", donHang.KhachHangID);
+            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "Ten", donHang.KhachHangID);
             return View(donHang);
         }
 

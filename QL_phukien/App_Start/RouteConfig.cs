@@ -45,6 +45,11 @@ namespace QL_phukien
                 url: "{controller}/{action}",
                 defaults: new { controller = "NguoiDung", action = "Index" }
             );
+            routes.MapRoute(
+                name: "Landing",
+                url: "{controller}/{action}",
+                defaults: new { controller = "landing", action = "Index" }
+            );
         }
     }
 }
