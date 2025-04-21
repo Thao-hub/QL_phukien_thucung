@@ -12,7 +12,7 @@ namespace QL_phukien
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery1110").Include(
-                        "~/Scripts/jquery-1.11.0.min.js"));
+                        "~/Scripts/landing_js/jquery-1.11.0.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -45,19 +45,23 @@ namespace QL_phukien
 
             bundles.Add(new ScriptBundle("~/bundles/toggleStatus").Include(
                    "~/Scripts/toggleStatus.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
-                   "~/Scripts/plugins.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/script").Include(
-                   "~/Scripts/script.js"));
-
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/core.css",
                       "~/Content/theme-default.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
+                   "~/Scripts/landing_js/plugins.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/script").Include(
+                   "~/Scripts/landing_js/script.js"));
+
+            bundles.Add(new StyleBundle("~/Content/landing_css").Include(
+                      "~/Content/landing_css/swiper-bundle.min.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/landing_css/style.css"));
             // Enable bundling & minification
             //BundleTable.EnableOptimizations = true;
         }

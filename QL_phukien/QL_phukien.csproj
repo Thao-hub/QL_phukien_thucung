@@ -305,6 +305,10 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\core.css" />
+    <Content Include="Content\landing_css\normalize.css" />
+    <Content Include="Content\landing_css\style.css" />
+    <Content Include="Content\landing_css\swiper-bundle.min.css" />
+    <Content Include="Content\landing_css\vendor.css" />
     <Content Include="Content\theme-default.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -335,6 +339,12 @@
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\landing_js\iconify-icon.min.js" />
+    <Content Include="Scripts\landing_js\jquery-1.11.0.min.js" />
+    <Content Include="Scripts\landing_js\modernizr.js" />
+    <Content Include="Scripts\landing_js\plugins.js" />
+    <Content Include="Scripts\landing_js\script.js" />
+    <Content Include="Scripts\landing_js\swiper-bundle.min.js" />
     <Content Include="Scripts\libs\dashboards-analytics.js" />
     <Content Include="Scripts\libs\extended-ui-perfect-scrollbar.js" />
     <Content Include="Scripts\libs\form-basic-inputs.js" />
