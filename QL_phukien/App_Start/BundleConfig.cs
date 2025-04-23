@@ -63,7 +63,7 @@ namespace QL_phukien
                       "~/Content/bootstrap.min.css",
                       "~/Content/landing_css/style.css"));
             // Enable bundling & minification
-            //BundleTable.EnableOptimizations = true;
+            // BundleTable.EnableOptimizations = true;
         }
     }
 }

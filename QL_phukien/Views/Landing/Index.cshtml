@@ -1,6 +1,180 @@
-﻿@model QL_phukien.Models.SanPham
+﻿@model IEnumerable<QL_phukien.Models.SanPham>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Landing";
     Layout = "~/Views/Shared/_LandingLayout.cshtml";
+
+    var danhMucs = ViewBag.DanhMucs as List<QL_phukien.Models.DanhMuc>;
+}
+
+<section id="foodies" class="my-5">
+    <div class="container my-5 py-5">
+
+        <div class="section-header d-md-flex justify-content-between align-items-center">
+            <h2 class="display-3 fw-normal">Sản phẩm</h2>
+            <div class="mb-4 mb-md-0">
+                @*<p class="m-0">
+            <button class="filter-button me-4 active" data-filter="*">Tất cả</button>
+            @foreach (var dm in danhMucs)
+            {
+                <button class="filter-button me-4" data-filter=".dm-@dm.ID">@dm.Ten</button>
+            }
+        </p>*@
+                <div class="m-0 d-flex flex-wrap gap-2">
+                    <!-- "Tất cả" button -->
+                    <form method="get" action="@Url.Action("Index", "Landing")">
+                        <button type="submit" class="filter-button @((ViewBag.SelectedDanhMucId == null && String.IsNullOrEmpty(ViewBag.SearchTerm as string)) ? "active" : "")">
+                            Tất cả
+                        </button>
+                    </form>
+
+                    @foreach (var dm in danhMucs)
+                    {
+                        <form method="get" action="@Url.Action("Index", "Landing")">
+                            <input type="hidden" name="danhMucId" value="@dm.ID" />
+                            <button type="submit" class="filter-button @(ViewBag.SelectedDanhMucId == dm.ID ? "active" : "")">
+                                @dm.Ten
+                            </button>
+                        </form>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="item cat col-md-4 col-lg-3 my-4">Không có sản phẩm nào</div>
+        }
+        else
+        {
+
+            <div class="isotope-container row">
+                @foreach (var item in Model)
+                {
+
+                    <div class="item dm-@item.DanhMucID col-md-4 col-lg-3 my-4">
+                        @*<div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">New</div>*@
+                        <div class="card position-relative">
+                            <a href="single-product.html">
+                                <img src="@Url.Content("~/Content/assets/img/products/" + @item.HinhAnh)" width="310" height="283" class="img-fluid rounded-4" alt="image">
+                            </a>
+                            <div class="card-body p-0">
+                                <a href="single-product.html">
+                                    <h3 class="card-title pt-4 m-0 text-truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="@item.TenSanPham">@item.TenSanPham</h3>
+                                </a>
+
+                                <div class="card-text">
+                                    <span class="rating secondary-font">
+                                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                                        <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                                        5.0
+                                    </span>
+
+                                    <h3 class="secondary-font text-primary">@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</h3>
+
+                                    <div class="d-flex flex-wrap mt-3">
+                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
+                                            <h5 class="text-uppercase m-0">Thêm vào giỏ hàng</h5>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+        }
+    </div>
+</section>
+
+<section id="insta" class="my-5">
+    <div class="row g-0 py-5">
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+        <div class="col instagram-item  text-center position-relative">
+            <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+            </div>
+            <a href="#">
+                <img src="~/Content/assets/img/landing/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        var $grid = $('.isotope-container').isotope({
+            itemSelector: '.item',
+            layoutMode: 'fitRows'
+        });
+
+        $('.filter-button').on('click', function () {
+            $('.filter-button').removeClass('active');
+            $(this).addClass('active');
+
+            var filterValue = $(this).attr('data-filter');
+            $grid.isotope({ filter: filterValue });
+
+            // Clean search term from URL
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('searchTerm')) {
+                params.delete('searchTerm');
+                const newUrl = window.location.pathname + '?' + params.toString() + '#foodies';
+                history.replaceState(null, '', newUrl);
+            }
+
+            // Clear the search box
+            const searchInput = document.querySelector('input[name="searchTerm"]');
+            if (searchInput) searchInput.value = '';
+        });
+    </script>
+
 }
