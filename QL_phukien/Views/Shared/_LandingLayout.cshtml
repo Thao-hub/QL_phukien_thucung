@@ -1,15 +1,11 @@
 ﻿@using System.Web.Routing
 @model IEnumerable<QL_phukien.Models.SanPham>
-
 @{
     var currentAction = ViewContext.RouteData.Values["action"].ToString();
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
-
-    
 }
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>@ViewBag.Title | LuxPet</title>
     <meta charset="utf-8">
@@ -20,98 +16,25 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="description" content="">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
           rel="stylesheet">
     @Styles.Render("~/Content/landing_css")
 </head>
-
 <body>
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            <div class="preloader-wrapper">
-                <div class="preloader">
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-                <div class="offcanvas-header justify-content-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div class="order-md-last">
-                        <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Giỏ hàng của tôi</span>
-                            <span class="badge bg-primary rounded-circle pt-2">3</span>
-                        </h4>
-                        <ul class="list-group mb-3">
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Hạt cho chó Shiba</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">20000 đ</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Dog Food</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">800000 đ</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between lh-sm">
-                                <div>
-                                    <h6 class="my-0">Soft Toy</h6>
-                                    <small class="text-body-secondary">Brief description</small>
-                                </div>
-                                <span class="text-body-secondary">500000 đ</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <span class="fw-bold">Tổng cộng (VND)</span>
-                                <strong>$20</strong>
-                            </li>
-                        </ul>
-
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">Thanh toán</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
-                 aria-labelledby="Search">
-                <div class="offcanvas-header justify-content-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-
-                    <div class="order-md-last">
-                        <h4 class="text-primary text-uppercase mb-3">
-                            Search
-                        </h4>
-                        <div class="search-bar border rounded-2 border-dark-subtle">
-                            <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-                                <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here" />
-                                <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <header>
                 <div class="container py-2">
                     <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
-
                         <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                             <div class="main-logo">
                                 <a href="@Url.Action("Index", "Landing")">
-                                    <img src="~/Content/assets/img/landing/logo.png" alt="logo" class="img-fluid">
+                                    <img src="~/Content/assets/img/landing/logo_LuxPet.png" alt="logo" class="img-fluid">
                                 </a>
                             </div>
                         </div>
-
                         <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
                             <div class="search-bar border rounded-2 px-3 border-dark-subtle">
                                 <form id="search-sp" class="text-center d-flex align-items-center" method="get" action="@Url.Action("Index", "Landing")">
@@ -127,30 +50,23 @@
                                 </form>
                             </div>
                         </div>
-
-
                         <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
                             <div class="support-box text-end d-none d-xl-block">
                                 <span class="fs-6 secondary-font text-muted">Điện thoại</span>
-                                <h5 class="mb-0">+ 84 844477328</h5>
+                                <h5 class="mb-0">+84 844 477 328</h5>
                             </div>
                             <div class="support-box text-end d-none d-xl-block">
                                 <span class="fs-6 secondary-font text-muted">Email</span>
-                                <h5 class="mb-0">admin@gmail.com</h5>
+                                <h5 class="mb-0" style="text-transform: none;">luxpet@gmail.com</h5>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-
                 <div class="container-fluid">
                     <hr class="m-0">
                 </div>
-
                 <div class="container">
                     <nav class="main-menu d-flex navbar navbar-expand-lg ">
-
                         <div class="d-flex d-lg-none align-items-end mt-3">
                             <ul class="d-flex justify-content-end list-unstyled m-0">
                                 <li>
@@ -163,198 +79,111 @@
                                         <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                                     </a>
                                 </li>
-
                                 <li>
-                                    <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                                       aria-controls="offcanvasCart">
+                                    <a href="#" class="mx-3">
                                         <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
                                         <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
                                             03
                                         </span>
                                     </a>
                                 </li>
-
                                 <li>
                                     <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
                                        aria-controls="offcanvasSearch">
                                         <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
-
                                     </a>
                                 </li>
                             </ul>
-
                         </div>
-
                         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
                                 aria-controls="offcanvasNavbar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-
                         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-
                             <div class="offcanvas-header justify-content-center">
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
-
                             <div class="offcanvas-body justify-content-between">
-                                <select class="filter-categories border-0 mb-0 me-5">
-
+                                <select class="filter-categories border-0 mb-0 me-5 invisible ">
                                     <option scope="col">Danh mục sản phẩm</option>
                                     <option>Hạt</option>
                                     <option>Quần áo</option>
                                     <option>Pate</option>
                                     <option>Đồ chơi</option>
                                 </select>
-
                                 <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
                                     <li class="nav-item">
-                                        <a href="index.html" class="nav-link active">Trang Chủ</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                                           aria-expanded="false">Trang</a>
-                                        <ul class="dropdown-menu" aria-labelledby="pages">
-                                            <li><a href="index.html" class="dropdown-item">Cửa hàng</a></li>
-                                            <li><a href="index.html" class="dropdown-item">Giỏ hàng</a></li>
-                                            <li><a href="index.html" class="dropdown-item">Thanh toán</a></li>
-                                            <li><a href="index.html" class="dropdown-item">Liên hệ</a></li>
-                                        </ul>
+                                        <a href="@Url.Action("Index", "Landing")" class="nav-link active">Trang Chủ</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html" class="nav-link">Cửa hàng</a>
+                                        <a href="#foodies" class="nav-link">Cửa hàng</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="index.html" class="nav-link">Liên hệ</a>
                                     </li>
                                 </ul>
-
                                 <div class="d-none d-lg-flex align-items-end">
                                     <ul class="d-flex justify-content-end list-unstyled m-0">
-                                        <li>
+                                        <li class="invisible">
                                             <a href="index.html" class="mx-3">
                                                 <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="invisible">
                                             <a href="index.html" class="mx-3">
                                                 <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                                             </a>
                                         </li>
 
                                         <li class="">
-                                            <a href="index.html" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                                               aria-controls="offcanvasCart">
+                                            <a href="@Url.Action("Index", "Cart")" class="mx-3">
                                                 <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                                <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                                                    03
+                                                <span id="cart-count" class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                                                    0
                                                 </span>
                                             </a>
                                         </li>
                                     </ul>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </nav>
-
-
-
                 </div>
             </header>
-
-            <section id="banner" style="background: #F9F3EC;">
-                <div class="container">
-                    <div class="swiper main-swiper">
-                        <div class="swiper-wrapper">
-
-                            <div class="swiper-slide py-5">
-                                <div class="row banner-content align-items-center">
-                                    <div class="img-wrapper col-md-5">
-                                        <img src="~/Content/assets/img/landing/banner-img.png" class="img-fluid">
-                                    </div>
-                                    <div class="content-wrapper col-md-7 p-5 mb-5">
-                                        <h2 class="banner-title display-1 fw-normal">
-                                            Điểm đến tốt nhất dành cho<span class="text-primary">thú cưng của bạn</span>
-                                        </h2>
-                                        <a href="#foodies" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                                            Mua sắm ngay bây giờ
-                                            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-                                                <use xlink:href="#arrow-right"></use>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-pagination mb-5"></div>
-
-
-            </section>
-
             @RenderBody()
             <footer id="footer" class="my-5">
                 <div class="container py-5 my-5">
                     <div class="row">
+                        <div class="col-md-3">
+                            <div class="footer-brand mb-4 text-center text-md-start">
+                                <img src="~/Content/assets/img/landing/logo_LuxPet.png" alt="logo" class="mb-3" style="max-width: 200px;">
+                                <p class="blog-paragraph fs-6">
+                                    Đăng ký nhận bản tin của chúng tôi để nhận thông tin cập nhật về các ưu đãi lớn.
+                                </p>
+                            </div>
 
+                            <div class="footer-menu">
+                                <ul class="d-flex list-unstyled gap-3 justify-content-center justify-content-md-start">
+                                    <li><a href="#"><iconify-icon icon="ri:facebook-fill" class="social-icon"></iconify-icon></a></li>
+                                    <li><a href="#"><iconify-icon icon="ri:twitter-fill" class="social-icon"></iconify-icon></a></li>
+                                    <li><a href="#"><iconify-icon icon="ri:pinterest-fill" class="social-icon"></iconify-icon></a></li>
+                                    <li><a href="#"><iconify-icon icon="ri:youtube-fill" class="social-icon"></iconify-icon></a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="footer-menu">
-                                <ul class="d-flex list-unstyled gap-2">
-                                    <li class="social">
-                                        <a href="#">
-                                            <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
-                                        </a>
-                                    </li>
-                                    <li class="social">
-                                        <a href="#">
-                                            <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
-                                        </a>
-                                    </li>
-                                    <li class="social">
-                                        <a href="#">
-                                            <iconify-icon class="social-icon" icon="ri:pinterest-fill"></iconify-icon>
-                                        </a>
-                                    </li>
-                                    <li class="social">
-                                        <a href="#">
-                                            <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
-                                        </a>
-                                    </li>
-                                    <li class="social">
-                                        <a href="#">
-                                            <iconify-icon class="social-icon" icon="ri:youtube-fill"></iconify-icon>
-                                        </a>
-                                    </li>
-
+                                <h3>Liên Kết Nhanh</h3>
+                                <ul class="list-unstyled">
+                                    <li><a href="#" class="nav-link">Trang Chủ</a></li>
+                                    <li><a href="#" class="nav-link">Về chúng tôi</a></li>
+                                    <li><a href="#" class="nav-link">Liên hệ với chúng tôi</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="footer-menu">
-                            <h3>Liên kết nhanh</h3>
-                            <ul class="menu-list list-unstyled">
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Trang Chủ</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Về chúng tôi</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="nav-link">Liên hệ với chúng tôi</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
-
             </footer>
-
             <div id="footer-bottom">
                 <div class="container">
                     <hr class="m-0">
@@ -366,7 +195,7 @@
                             <p class="secondary-font">
                                 Được thực hiện bởi <a href="https://templatesjungle.com/" target="_blank"
                                                       class="text-decoration-underline fw-bold text-black-50"> Thảo</a> và <a href="https://themewagon.com/" target="_blank"
-                                                                                                                              class="text-decoration-underline fw-bold text-black-50"> Thái</a>
+                                                      class="text-decoration-underline fw-bold text-black-50"> Thái</a>
                             </p>
                         </div>
                     </div>

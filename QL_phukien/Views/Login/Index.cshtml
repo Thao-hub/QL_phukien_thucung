@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en"
+      class="light-style customizer-hide"
+      dir="ltr"
+      data-theme="theme-default"
+      data-assets-path="@Url.Content("~/assets/")"
+      data-template="vertical-menu-template-free">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Login</title>
+    <meta name="description" content="" />
+    <link rel="icon" type="image/x-icon" src="~/Content/assets/img/favicon/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet" />
+    <link href="~/Content/assets/vendor/fonts/boxicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/Content/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link href="~/Content/assets/vendor/css/pages/page-auth.css" rel="stylesheet" />
+    <script src="~/Scripts/login/helpers.js"></script>
+    <script src="~/Scripts/login/config.js"></script>
+</head>
+<body>
+    <div class="container-xxl">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+                <!-- Register -->
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Logo -->
+                        <div class="app-brand justify-content-center mb-2">
+                            <a href="index.html" class="app-brand-link gap-2">
+                                <span class="app-brand-logo demo">
+                                    <img src="~/Content/assets/img/login/logo_login.png" />
+                                </span>
+                            </a>
+                        </div>
+                        <!-- /Logo -->
+                        <h4 class="mb-2">Chào mừng đến với Lux Pet</h4>
+                        <p class="mb-2">Người dùng được ủy quyền hãy đăng nhập để tiếp tục 🚀</p>
+                        <form id="formAuthentication" class="mb-3" action="@Url.Action("Index","Login")" method="post">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email hoặc Tên đăng nhập</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="EmailorTen"
+                                       name="EmailorTen"
+                                       placeholder="Nhập email hoặc tên đăng nhập"
+                                       autofocus />
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                @*<div class="d-flex justify-content-between">
+                <label class="form-label" for="password">Mật khẩu</label>
+                <a href="auth-forgot-password-basic.html">
+                    <small>Quên mật khẩu</small>
+                </a>
+            </div>*@
+                                <div class="input-group input-group-merge">
+                                    <input type="password"
+                                           id="password"
+                                           class="form-control"
+                                           name="MatKhau"
+                                           placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                           aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer" onclick="togglePasswordVisibility()">
+                                        <i class="bx bx-hide" id="password-icon"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <script>
+                                function togglePasswordVisibility() {
+                                    var passwordField = document.getElementById("password");
+                                    var icon = document.getElementById("password-icon");
+
+                                    if (passwordField.type === "password") {
+                                        passwordField.type = "text";
+                                        icon.classList.replace("bx-hide", "bx-show"); // Đổi biểu tượng từ ẩn sang hiện
+                                    } else {
+                                        passwordField.type = "password";
+                                        icon.classList.replace("bx-show", "bx-hide"); // Đổi biểu tượng từ hiện sang ẩn
+                                    }
+                                }
+                            </script>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember-me" />
+                                    <label class="form-check-label" for="remember-me"> Nhớ đăng nhập </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
+                            </div>
+                        </form>
+                        @if (ViewBag.ThongBao != null)
+                        {
+                            <div class="alert alert-danger">@ViewBag.ThongBao</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

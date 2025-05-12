@@ -8,6 +8,7 @@ using QL_phukien.Models;
 
 namespace QL_phukien.Controllers
 {
+    [Authorize] // Chỉ cho phép người dùng đã xác thực truy cập
     public class DonViController : Controller
     {
         // GET: DonVi

@@ -129,12 +129,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\DonViController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -267,6 +269,7 @@
     <Content Include="Content\assets\img\landing\item8.jpg" />
     <Content Include="Content\assets\img\landing\item9.jpg" />
     <Content Include="Content\assets\img\landing\logo.png" />
+    <Content Include="Content\assets\img\landing\logo_LuxPet.png" />
     <Content Include="Content\assets\img\landing\reviewer-1.jpg" />
     <Content Include="Content\assets\img\landing\reviewer-2.jpg" />
     <Content Include="Content\assets\img\landing\reviewer-3.jpg" />
@@ -274,6 +277,7 @@
     <Content Include="Content\assets\img\layouts\layout-fluid-light.png" />
     <Content Include="Content\assets\img\layouts\layout-without-menu-light.png" />
     <Content Include="Content\assets\img\layouts\layout-without-navbar-light.png" />
+    <Content Include="Content\assets\img\login\logo_login.png" />
     <Content Include="Content\assets\img\products\ao_so_mi.jpg" />
     <Content Include="Content\assets\img\products\bong_cao_su.jpg" />
     <Content Include="Content\assets\img\products\dam_cosplay.jpg" />
@@ -288,6 +292,14 @@
     <Content Include="Content\assets\img\products\thuc_an_cho_mini_truong_thanh.jpg" />
     <Content Include="Content\assets\img\products\thuc_an_cho_shiba.jpg" />
     <Content Include="Content\assets\img\products\thuc_an_cho_truong_thanh_vua.jpg" />
+    <Content Include="Content\assets\vendor\css\core.css" />
+    <Content Include="Content\assets\vendor\css\pages\page-account-settings.css" />
+    <Content Include="Content\assets\vendor\css\pages\page-auth.css" />
+    <Content Include="Content\assets\vendor\css\pages\page-icons.css" />
+    <Content Include="Content\assets\vendor\css\pages\page-misc.css" />
+    <Content Include="Content\assets\vendor\css\theme-default.css" />
+    <Content Include="Content\assets\vendor\fonts\boxicons.css" />
+    <Content Include="Content\assets\vendor\fonts\boxicons\boxicons.svg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -336,6 +348,10 @@
     <Content Include="Models\QL_phukien_Model.edmx.diagram">
       <DependentUpon>QL_phukien_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\assets\vendor\fonts\boxicons\boxicons.eot" />
+    <Content Include="Content\assets\vendor\fonts\boxicons\boxicons.ttf" />
+    <Content Include="Content\assets\vendor\fonts\boxicons\boxicons.woff" />
+    <Content Include="Content\assets\vendor\fonts\boxicons\boxicons.woff2" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
@@ -358,6 +374,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login\bootstrap.js" />
+    <Content Include="Scripts\login\config.js" />
+    <Content Include="Scripts\login\helpers.js" />
+    <Content Include="Scripts\login\menu.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -367,6 +387,7 @@
     <Content Include="Scripts\libs\ui-toasts.js" />
     <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\plugins.js" />
+    <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\toggleStatus.js" />
     <Content Include="Scripts\upload.js" />
@@ -398,13 +419,15 @@
     <Content Include="Views\KhachHang\Create.cshtml" />
     <Content Include="Views\KhachHang\Edit.cshtml" />
     <Content Include="Views\Shared\_ConfirmModal.cshtml" />
-    <Content Include="Views\NguoiDung\Index.cshtml" />
     <Content Include="Views\NguoiDung\Create.cshtml" />
     <Content Include="Views\NguoiDung\Edit.cshtml" />
     <Content Include="Views\DonHang\Create.cshtml" />
     <Content Include="Views\DonHang\Edit.cshtml" />
     <Content Include="Views\Shared\_LandingLayout.cshtml" />
     <Content Include="Views\Landing\Index.cshtml" />
+    <Content Include="Views\NguoiDung\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

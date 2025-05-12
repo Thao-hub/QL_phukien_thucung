@@ -55,6 +55,9 @@ namespace QL_phukien
             bundles.Add(new ScriptBundle("~/bundles/plugins").Include(
                    "~/Scripts/landing_js/plugins.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/popper").Include(
+                   "~/Scripts/popper.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/script").Include(
                    "~/Scripts/landing_js/script.js"));
 
@@ -62,6 +65,12 @@ namespace QL_phukien
                       "~/Content/landing_css/swiper-bundle.min.css",
                       "~/Content/bootstrap.min.css",
                       "~/Content/landing_css/style.css"));
+
+            bundles.Add(new StyleBundle("~/Content/login_css").Include(
+                      "~/Content/boxicons.css",
+                      "~/Content/core.css",
+                      "~/Content/theme-default.css",
+                      "~/Content/page-auth.css"));
             // Enable bundling & minification
             // BundleTable.EnableOptimizations = true;
         }

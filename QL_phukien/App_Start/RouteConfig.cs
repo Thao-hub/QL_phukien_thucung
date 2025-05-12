@@ -12,7 +12,11 @@ namespace QL_phukien
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                name: "",
+                url: "{controller}/{action}",
+                defaults: new { controller = "landing", action = "Index" }
+            );
             routes.MapRoute(
                 name: "Home",
                 url: "{controller}/{action}/{id}",
@@ -46,10 +50,15 @@ namespace QL_phukien
                 defaults: new { controller = "NguoiDung", action = "Index" }
             );
             routes.MapRoute(
-                name: "Landing",
+                name: "Login",
                 url: "{controller}/{action}",
-                defaults: new { controller = "landing", action = "Index" }
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Cart",
+               url: "{controller}/{action}",
+               defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional }
+           );
         }
     }
 }

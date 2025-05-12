@@ -7,6 +7,7 @@ using QL_phukien.Models;
 
 namespace QL_phukien.Controllers
 {
+    [Authorize] // Chỉ cho phép người dùng đã xác thực truy cập
     public class DonHangController : Controller
     {
         private QL_Cua_Hang_Thu_Cung_2Entities1 db = new QL_Cua_Hang_Thu_Cung_2Entities1();
@@ -132,9 +133,16 @@ namespace QL_phukien.Controllers
             if (donHang == null)
                 return HttpNotFound();
 
+            // Truyền thông tin khách hàng và đơn hàng
             ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "Ten", donHang.KhachHangID);
+
+            // Truyền danh sách các trạng thái vào ViewBag
+            ViewBag.TrangThaiList = new SelectList(new[] { "Đã Đặt", "Chờ Xử Lý", "Đang Xử Lý", "Đã Giao", "Đã Hủy" }, donHang.TrangThai);
+
+            ViewBag.KhachHang = donHang.KhachHang;  // Truyền thông tin khách hàng liên quan
             return View(donHang);
         }
+
 
         // POST: DonHang/Edit/5 (Xử lý chỉnh sửa đơn hàng)
         [HttpPost]
@@ -143,12 +151,24 @@ namespace QL_phukien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(donHang).State = System.Data.Entity.EntityState.Modified;
+                var existingDonHang = db.DonHangs.Include("KhachHang").FirstOrDefault(d => d.ID == donHang.ID);
+                if (existingDonHang == null)
+                    return HttpNotFound();
+
+                // Update order fields
+                existingDonHang.TrangThai = donHang.TrangThai;
+                existingDonHang.ThanhToan = donHang.ThanhToan;
+
+                // Update customer information
+                TryUpdateModel(existingDonHang.KhachHang, "", new[] { "Email", "SoLienHe", "DiaChi" });
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "TenKhachHang", donHang.KhachHangID);
+            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "Ten", donHang.KhachHangID);
+            ViewBag.TrangThaiList = new SelectList(new[] { "Đã Đặt", "Chờ Xử Lý", "Đang Xử Lý", "Đã Giao", "Đã Hủy" }, donHang.TrangThai);
+
             return View(donHang);
         }
 

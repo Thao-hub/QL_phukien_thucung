@@ -1,0 +1,116 @@
+﻿@model IEnumerable<QL_phukien.Models.SanPham>
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">Giỏ hàng của tôi</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+    else if (!Model.Any())
+    {
+        <div class="alert alert-info">Giỏ hàng đang trống.</div>
+        <div class="text-end">
+            <button onclick="window.history.back()" class="btn btn-secondary btn-lg mt-3">Quay lại</button>
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr style="font-size: 1.5rem;">
+                    <th>Ảnh</th>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var quantity = ViewBag.CartQuantities[item.ID]; // Bạn cần truyền quantity từ controller
+                    <tr style="font-size: 1.5rem;">
+                        <td>
+                            <img src="@Url.Content("~/Content/assets/img/products/" + item.HinhAnh)" width="80" class="img-thumbnail" />
+                        </td>
+                        <td>@item.TenSanPham</td>
+                        <td>@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</td>
+                        <td>
+                            <form action="@Url.Action("UpdateQuantity", "Cart")" method="post" class="d-flex align-items-center">
+                                <input type="hidden" name="productId" value="@item.ID" />
+                                <div class="input-group" style="border: 1px solid #ccc; border-radius: 25px; overflow: hidden; width: 120px;">
+                                    <button type="submit" name="quantity" value="@Math.Max(1, quantity - 1)" class="btn btn-light">−</button>
+                                    <span class="form-control text-center border-0" style="background-color: white;">@quantity</span>
+                                    <button type="submit" name="quantity" value="@(quantity + 1)" @(quantity >= item.SoLuong ? "disabled" : "") class="btn btn-light">+</button>
+                                </div>
+                            </form>
+                        </td>
+
+                        <td class="d-flex justify-content-between align-items-center" style="min-width: 150px;">
+                            <span>@((item.Gia * quantity).ToString("N0") + " đ")</span>
+                            <form action="@Url.Action("Remove", "Cart")" method="post" class="ms-2">
+                                <input type="hidden" name="productId" value="@item.ID" />
+                                <button class="btn btn-link text-dark fs-4 p-0" style="text-decoration: none;">×</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h4>Tổng: @ViewBag.Total.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</h4>
+            <button onclick="window.history.back()" class="btn btn-secondary btn-lg mt-3 ms-2">Tiếp tục mua hàng</button> <!-- Nút Tiếp tục mua hàng -->
+        </div>
+
+        <h3 class="mt-5">Thông tin khách hàng</h3>
+        <form action="@Url.Action("Checkout", "Cart")" method="post">
+            @Html.AntiForgeryToken() <!-- Bảo vệ CSRF -->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="Ten" class="form-label">Tên khách hàng</label>
+                        <input type="text" class="form-control" id="Ten" name="Ten" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="SoLienHe" class="form-label">Số liên hệ</label>
+                        <input type="text" class="form-control" id="SoLienHe" name="SoLienHe" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="DiaChi" class="form-label">Địa chỉ giao hàng</label>
+                <textarea class="form-control" id="DiaChi" name="DiaChi" rows="4" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="GioiTinh" class="form-label">Giới tính</label>
+                <select class="form-select" id="GioiTinh" name="GioiTinh" required>
+                    <option value="">Chọn giới tính</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" required
+                       style="text-transform: none;" autocapitalize="off" autocomplete="email" />
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Xác nhận đơn hàng</button>
+        </form>
+
+    }
+</div>

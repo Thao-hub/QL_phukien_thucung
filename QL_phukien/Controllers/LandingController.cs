@@ -7,6 +7,7 @@ using QL_phukien.Models;
 
 namespace QL_phukien.Controllers
 {
+    [AllowAnonymous]
     public class LandingController : Controller
     {
         private readonly QL_Cua_Hang_Thu_Cung_2Entities1 db = new QL_Cua_Hang_Thu_Cung_2Entities1();

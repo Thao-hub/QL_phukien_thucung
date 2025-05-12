@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace QL_phukien.Controllers
 {
+    [Authorize] // Chỉ cho phép người dùng đã xác thực truy cập
     public class HomeController : Controller
     {
         public ActionResult Index()

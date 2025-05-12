@@ -6,7 +6,34 @@
 
     var danhMucs = ViewBag.DanhMucs as List<QL_phukien.Models.DanhMuc>;
 }
+<section id="banner" style="background: #F9F3EC;">
+    <div class="container">
+        <div class="swiper main-swiper">
+            <div class="swiper-wrapper">
 
+                <div class="swiper-slide py-5">
+                    <div class="row banner-content align-items-center">
+                        <div class="img-wrapper col-md-5">
+                            <img src="~/Content/assets/img/landing/banner-img.png" class="img-fluid">
+                        </div>
+                        <div class="content-wrapper col-md-7 p-5 mb-5">
+                            <h2 class="banner-title display-1 fw-normal">
+                                Điểm đến tốt nhất dành cho<span class="text-primary">thú cưng của bạn</span>
+                            </h2>
+                            <a href="#foodies" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                Mua sắm ngay bây giờ
+                                <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+                                    <use xlink:href="#arrow-right"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper-pagination mb-5"></div>
+</section>
 <section id="foodies" class="my-5">
     <div class="container my-5 py-5">
 
@@ -78,11 +105,11 @@
                                     <h3 class="secondary-font text-primary">@item.Gia.ToString("C", new System.Globalization.CultureInfo("vi-VN"))</h3>
 
                                     <div class="d-flex flex-wrap mt-3">
-                                        <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
+                                        <a href="javascript:void(0);" class="btn-cart me-3 px-4 pt-3 pb-3" onclick="addToCart(@item.ID)">
                                             <h5 class="text-uppercase m-0">Thêm vào giỏ hàng</h5>
                                         </a>
-
                                     </div>
+
                                 </div>
 
                             </div>
@@ -175,6 +202,50 @@
             const searchInput = document.querySelector('input[name="searchTerm"]');
             if (searchInput) searchInput.value = '';
         });
+
+        function updateCartCount() {
+            fetch('/Cart/GetCartItemCount')
+                .then(response => response.json())
+                .then(data => {
+                    const badge = document.getElementById('cart-count');
+                    if (badge) {
+                        badge.textContent = data.count;
+                    }
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCartCount(); // Update on load
+        });
+
+        function addToCart(productId) {
+            fetch('/Cart/AddToCart?productId=' + productId, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('test',data);
+                    if (data.success) {
+                        alert('Đã thêm vào giỏ hàng!');
+                        updateCartCount(); // Update cart icon count
+                        // reloadCartPreview(); // Optional: refresh cart preview
+                    } else {
+                        alert('Thêm vào giỏ hàng thất bại.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm vào giỏ hàng:', error);
+                });
+        }
+        function reloadCartPreview() {
+            fetch('/Cart/Preview')
+                .then(res => res.text())
+                .then(html => {
+                    document.querySelector('.offcanvas-body').innerHTML = html;
+                });
+        }
+
+
     </script>
 
 }
