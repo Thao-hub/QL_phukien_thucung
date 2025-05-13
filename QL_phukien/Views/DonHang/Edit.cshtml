@@ -4,36 +4,27 @@
     ViewBag.Title = "Chỉnh sửa đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4">Chỉnh Sửa Đơn Hàng</h4>
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="card mb-4">
             <div class="card-body">
-                <h5 class="card-title">Thông Tin Đơn Hàng</h5>
-
+                <h5 class="card-title">Thông Tin Khách Hàng</h5>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.ID)
-
                 <div class="row">
+                    <div class="mb-3 col-md-6">
+                        @Html.LabelFor(model => model.OrderID, "Mã Đơn Hàng", htmlAttributes: new { @class = "form-label" })
+                        <input type="text" class="form-control" value="@Model.OrderID" disabled />
+                    </div>
                     <!-- Tên khách hàng (không thể chỉnh sửa) -->
                     <div class="mb-3 col-md-6">
-                        @Html.LabelFor(model => model.KhachHangID, "Khách Hàng", htmlAttributes: new { @class = "form-label" })
+                        @Html.LabelFor(model => model.KhachHangID, "Tên Khách Hàng", htmlAttributes: new { @class = "form-label" })
                         <input type="text" class="form-control" value="@Model.KhachHang.Ten" disabled />
                     </div>
-
-                    <!-- Email (có thể chỉnh sửa) -->
-                    <div class="mb-3 col-md-6">
-                        @Html.LabelFor(model => model.KhachHang.Email, "Email", htmlAttributes: new { @class = "form-label" })
-                        @Html.TextBoxFor(model => model.KhachHang.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
-                    </div>
                 </div>
-
                 <div class="row">
                     <!-- Số điện thoại (có thể chỉnh sửa) -->
                     <div class="mb-3 col-md-6">
@@ -41,7 +32,6 @@
                         @Html.TextBoxFor(model => model.KhachHang.SoLienHe, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.KhachHang.SoLienHe, "", new { @class = "text-danger" })
                     </div>
-
                     <!-- Thanh toán (có thể chỉnh sửa) -->
                     <div class="mb-3 col-md-6">
                         @Html.LabelFor(model => model.ThanhToan, "Thanh Toán", htmlAttributes: new { @class = "form-label" })
@@ -53,15 +43,13 @@
                         @Html.ValidationMessageFor(s => s.ThanhToan, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="row">
-                    <!-- Địa chỉ (có thể chỉnh sửa) -->
+                    <!-- Email (có thể chỉnh sửa) -->
                     <div class="mb-3 col-md-6">
-                        @Html.LabelFor(model => model.KhachHang.DiaChi, "Địa Chỉ", htmlAttributes: new { @class = "form-label" })
-                        @Html.TextBoxFor(model => model.KhachHang.DiaChi, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.KhachHang.Email, "Email", htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.KhachHang.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
                     </div>
-
                     <!-- Trạng thái (có thể chỉnh sửa) -->
                     <div class="mb-3 col-md-6">
                         @Html.LabelFor(model => model.TrangThai, "Trạng Thái", htmlAttributes: new { @class = "form-label" })
@@ -69,13 +57,84 @@
                         @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
                     </div>
                 </div>
+                <div class="row">
+                    <!-- Địa chỉ (có thể chỉnh sửa) -->
+                    <div class="mb-3 col-md-6">
+                        @Html.LabelFor(model => model.KhachHang.DiaChi, "Địa Chỉ", htmlAttributes: new { @class = "form-label" })
+                        @Html.TextAreaFor(model => model.KhachHang.DiaChi, new { @class = "form-control", rows = "4" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!-- DANH SÁCH SẢN PHẨM ĐÃ ĐẶT -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Sản Phẩm Đã Đặt</h5>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-bordered align-middle text-center">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Mã Sản Phẩm</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ChiTietDonHangs != null && Model.ChiTietDonHangs.Any())
+                                    {
+                                        foreach (var item in Model.ChiTietDonHangs)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control text-center" value="@item.SanPhamID" readonly />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" value="@item.SanPham.TenSanPham" readonly />
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control text-center" value="@item.SoLuong" readonly />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control text-end" value="@String.Format("{0:N0}", item.Gia)" readonly />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control text-end" value="@String.Format("{0:N0}", item.SoLuong * item.Gia)" readonly />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">Không có sản phẩm nào.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="submit" class="btn btn-primary">Lưu Đơn Hàng</button>
-                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Hủy</a>
+                        <!-- Tổng tiền -->
+                        <div class="text-end mt-3">
+                            <h5>
+                                Tổng tiền:
+                                <strong class="text-primary">
+                                    @String.Format("{0:N0}đ", Model.ChiTietDonHangs?.Sum(ct => ct.SoLuong * ct.Gia) ?? 0)
+                                </strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="m-3">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <span class="tf-icons bx bx-save"></span>&nbsp; Lưu
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Thoát</a>
                 </div>
             </div>
-        </div>
+            </div>
     }
 </div>
 

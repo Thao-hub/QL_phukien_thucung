@@ -129,7 +129,11 @@ namespace QL_phukien.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            DonHang donHang = db.DonHangs.Find(id);
+            var donHang = db.DonHangs
+                .Include("KhachHang")
+                .Include("ChiTietDonHangs.SanPham") // Load cả sản phẩm trong Chi Tiết
+                .FirstOrDefault(d => d.ID == id);
+
             if (donHang == null)
                 return HttpNotFound();
 
@@ -141,36 +145,41 @@ namespace QL_phukien.Controllers
 
             ViewBag.KhachHang = donHang.KhachHang;  // Truyền thông tin khách hàng liên quan
             return View(donHang);
-        }
 
+        }
 
         // POST: DonHang/Edit/5 (Xử lý chỉnh sửa đơn hàng)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,KhachHangID,NgayDat,TongTien,TrangThai,ThanhToan")] DonHang donHang)
+        public ActionResult Edit(DonHang model)
         {
             if (ModelState.IsValid)
             {
-                var existingDonHang = db.DonHangs.Include("KhachHang").FirstOrDefault(d => d.ID == donHang.ID);
-                if (existingDonHang == null)
-                    return HttpNotFound();
+                // Fetch the existing DonHang from DB including its KhachHang
+                var donHang = db.DonHangs.Include("KhachHang").FirstOrDefault(d => d.ID == model.ID);
+                if (donHang == null) return HttpNotFound();
 
-                // Update order fields
-                existingDonHang.TrangThai = donHang.TrangThai;
-                existingDonHang.ThanhToan = donHang.ThanhToan;
+                // Cập nhật thông tin đơn hàng
+                donHang.ThanhToan = model.ThanhToan;
+                donHang.TrangThai = model.TrangThai;
 
-                // Update customer information
-                TryUpdateModel(existingDonHang.KhachHang, "", new[] { "Email", "SoLienHe", "DiaChi" });
+                // Cập nhật thông tin khách hàng
+                if (donHang.KhachHang != null)
+                {
+                    donHang.KhachHang.Email = model.KhachHang.Email;
+                    donHang.KhachHang.SoLienHe = model.KhachHang.SoLienHe;
+                    donHang.KhachHang.DiaChi = model.KhachHang.DiaChi;
+                }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "Ten", donHang.KhachHangID);
-            ViewBag.TrangThaiList = new SelectList(new[] { "Đã Đặt", "Chờ Xử Lý", "Đang Xử Lý", "Đã Giao", "Đã Hủy" }, donHang.TrangThai);
-
-            return View(donHang);
+            // Nếu có lỗi, trả về view để hiển thị lại
+            ViewBag.KhachHangID = new SelectList(db.KhachHangs, "ID", "Ten", model.KhachHangID);
+            return View(model);
         }
+
 
         // GET: DonHang/Delete/5 (Xác nhận xóa đơn hàng)
         public ActionResult Delete(int? id)

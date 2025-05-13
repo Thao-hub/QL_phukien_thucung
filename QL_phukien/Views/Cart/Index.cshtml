@@ -76,7 +76,7 @@
         <form action="@Url.Action("Checkout", "Cart")" method="post">
             @Html.AntiForgeryToken() <!-- Bảo vệ CSRF -->
 
-            <div class="row">
+            <div class="row" style="font-size: 1.5rem;">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Ten" class="form-label">Tên khách hàng</label>
@@ -91,20 +91,20 @@
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3" style="font-size: 1.5rem;">
                 <label for="DiaChi" class="form-label">Địa chỉ giao hàng</label>
                 <textarea class="form-control" id="DiaChi" name="DiaChi" rows="4" required></textarea>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="font-size: 1.5rem;">
                 <label for="GioiTinh" class="form-label">Giới tính</label>
-                <select class="form-select" id="GioiTinh" name="GioiTinh" required>
+                <select class="form-select" style="font-size: 1.5rem;" id="GioiTinh" name="GioiTinh" required>
                     <option value="">Chọn giới tính</option>
                     <option value="Nam">Nam</option>
                     <option value="Nữ">Nữ</option>
                     <option value="Khác">Khác</option>
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="font-size: 1.5rem;">
                 <label for="Email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="Email" name="Email" required
                        style="text-transform: none;" autocapitalize="off" autocomplete="email" />
